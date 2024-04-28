@@ -1,0 +1,21 @@
+{
+    "game_name": "HeroAcademy",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "BridgeBurningMontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 2.8
+    },
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "random_new_valid_action": true,
+        "population_size": 200
+    },
+    "result_file": "out/heroacademy/mctsbb_oe_simple_100_3_28_02_05_1_200.json"
+}

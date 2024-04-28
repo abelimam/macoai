@@ -1,0 +1,20 @@
+{
+    "game_name": "TankWar",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 2.8
+    },
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "population_size": 200
+    },
+    "result_file": "out/tankwar/mcts_oe_simple_100_3_28_02_05_200.json"
+}

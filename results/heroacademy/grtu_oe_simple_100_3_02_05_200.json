@@ -1,0 +1,19 @@
+{
+    "game_name": "HeroAcademy",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "OnlineEvolution",
+    "n_games": 100,
+    "budget": 3,
+    "wins1": 16,
+    "wins2": 84,
+    "ties": 0,
+    "player_1_forward_model_visits": 32006.29,
+    "player_1_visited_states": 15304.0,
+    "player_2_forward_model_visits": 64212.67,
+    "player_2_visited_states": 26433.13,
+    "p_value": 0.0,
+    "processing_time": 20438.935151815414,
+    "date": "2023-05-07",
+    "hour": "13:01:10"
+}

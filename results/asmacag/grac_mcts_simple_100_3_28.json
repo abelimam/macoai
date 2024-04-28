@@ -1,0 +1,19 @@
+{
+    "game_name": "Asmacag",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyAction",
+    "player2_name": "MontecarloTreeSearch",
+    "n_games": 100,
+    "budget": 3,
+    "wins1": 48,
+    "wins2": 49,
+    "ties": 3,
+    "player_1_forward_model_visits": 111.05,
+    "player_1_visited_states": 110.37,
+    "player_2_forward_model_visits": 1368.99,
+    "player_2_visited_states": 1307.92,
+    "p_value": 0.8874867784270215,
+    "processing_time": 868.3751721382141,
+    "date": "2023-05-25",
+    "hour": "09:27:55"
+}

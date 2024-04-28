@@ -1,0 +1,19 @@
+{
+    "game_name": "Asmacag",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyAction",
+    "player2_name": "OnlineEvolution",
+    "n_games": 100,
+    "budget": 1,
+    "wins1": 39,
+    "wins2": 60,
+    "ties": 1,
+    "player_1_forward_model_visits": 112.01,
+    "player_1_visited_states": 111.27,
+    "player_2_forward_model_visits": 13134.42,
+    "player_2_visited_states": 775.24,
+    "p_value": 0.002978026722621152,
+    "processing_time": 291.6560399532318,
+    "date": "2023-05-25",
+    "hour": "09:08:37"
+}

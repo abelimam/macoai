@@ -1,0 +1,19 @@
+{
+    "game_name": "TankWar",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 2.8
+    },
+    "player2_name": "MontecarloTreeSearch",
+    "player2_config": {
+        "c_value": 2.8,
+        "full_rollout_on": true
+    },
+    "result_file": "out/tankwar/mcts_mcts_simple_100_3_28_28_1.json"
+}

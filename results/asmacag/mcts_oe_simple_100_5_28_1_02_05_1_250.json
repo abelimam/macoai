@@ -1,0 +1,19 @@
+{
+    "game_name": "Asmacag",
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player2_name": "OnlineEvolution",
+    "n_games": 100,
+    "budget": 5,
+    "wins1": 52,
+    "wins2": 44,
+    "ties": 4,
+    "player_1_forward_model_visits": 25583.29,
+    "player_1_visited_states": 14076.79,
+    "player_2_forward_model_visits": 71682.39,
+    "player_2_visited_states": 1084.29,
+    "p_value": 0.25751798224906297,
+    "processing_time": 2993.1756081581116,
+    "date": "2023-05-25",
+    "hour": "12:07:31"
+}

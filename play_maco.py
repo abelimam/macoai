@@ -1,0 +1,70 @@
+import os  #
+
+from games.maco import *
+from heuristics import SimpleHeuristic
+from players import *
+
+
+if __name__ == '__main__':
+    # Players parameters
+    ## Greedy Action
+    greedy_heuristic = SimpleHeuristic()
+    ## Greedy Turn
+    greedyt_heuristic = SimpleHeuristic()    
+    ## Monte Carlo Tree Search
+    mcts_heuristic = SimpleHeuristic()
+    ## Online Evolution
+    oe_heuristic = SimpleHeuristic()
+    ## NTuple Bandit Online Evolution
+    dimensions = [38, 38, 38]  # Update based on Maco's action space
+    ntboe_heuristic = SimpleHeuristic()
+
+    save_name = "out/maco_output.txt"  # Where the game is going to be saved, can be None
+    # Ensure the directory exists
+    save_directory = os.path.dirname(save_name)  # Extracts the directory part from the save_name path
+    if save_directory and not os.path.exists(save_directory):  # Checks if the directory part is not empty and does not exist
+        os.makedirs(save_directory)  # Creates the directory and any intermediate directories if they don't exist
+
+    # Common parameters
+    budget = 5                                  # Time to think for the players (in seconds)
+    rounds = 100                                # Number of rounds to play
+    verbose = True                              # Whether to print messages
+    enforce_time = True                         # Whether the player time to think is going to be enforced
+    save_name = "out/maco_output.txt"           # Where the game is going to be saved, can be None
+
+    # MACO parameters
+    parameters = MacoGameParameters()
+    forward_model = MacoForwardModel()
+    fitness_evaluator = MacoFitnessEvaluator(ntboe_heuristic)
+    game = MacoGame(parameters, forward_model)
+
+    # players
+    random_player = RandomPlayer()
+    always_first = AlwaysFirstPlayer()
+    greedy = GreedyActionPlayer(greedy_heuristic)
+    greedyt = GreedyTurnPlayer(greedyt_heuristic)
+    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 5)
+    bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 5)
+    nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
+    oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
+
+    # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
+    ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
+
+    players = [greedyt, greedy]  # List of players
+
+    game.set_save_file(save_name)
+
+    game.run(players[0], players[1], budget, rounds, verbose, enforce_time)
+
+    if verbose:
+        print("\n*** ------------------------------------------------- ")
+        if game.get_winner() != -1:
+            print(f"*** The winner is player: {game.get_winner()} [{players[game.get_winner()]}]")
+        else:
+            print("*** There is a Tie.")
+        print("*** ------------------------------------------------- ")
+    else:
+        print(f"The winner is player: {game.get_winner()} [{players[game.get_winner()]}]")
+
+    print(game.game_state.board_to_string())

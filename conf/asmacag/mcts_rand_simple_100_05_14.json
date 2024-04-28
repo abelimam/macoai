@@ -1,0 +1,15 @@
+{
+    "game_name": "Asmacag",
+    "n_games": 100,
+    "budget": 0.5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 1.4
+    },
+    "player2_name": "Random",
+    "result_file": "out/asmacag/mcts_rand_simple_100_05_14.json"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "TankWar",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyAction",
+    "player2_name": "Random",
+    "n_games": 100,
+    "budget": 3,
+    "wins1": 83,
+    "wins2": 17,
+    "ties": 0,
+    "player_1_forward_model_visits": 19583.45,
+    "player_1_visited_states": 17406.11,
+    "player_2_forward_model_visits": 0.0,
+    "player_2_visited_states": 0.0,
+    "p_value": 0.0,
+    "processing_time": 12170.86778330803,
+    "date": "2023-04-20",
+    "hour": "00:16:08"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "TankWar",
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player2_name": "BridgeBurningMontecarloTreeSearch",
+    "n_games": 100,
+    "budget": 1,
+    "wins1": 37,
+    "wins2": 63,
+    "ties": 0,
+    "player_1_forward_model_visits": 13076.29,
+    "player_1_visited_states": 12252.1,
+    "player_2_forward_model_visits": 10139.7,
+    "player_2_visited_states": 12924.2,
+    "p_value": 0.00023603441652930712,
+    "processing_time": 10597.340513467789,
+    "date": "2023-05-12",
+    "hour": "10:01:33"
+}

@@ -1,0 +1,15 @@
+{
+    "game_name": "TankWar",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyAction",
+    "player2_name": "BridgeBurningMontecarloTreeSearch",
+    "player2_config": {
+        "c_value": 2.8
+    },
+    "result_file": "out/tankwar/grac_mctsbb_simple_100_3_28.json"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "Asmacag",
+    "heuristic_name": "Simple",
+    "player1_name": "BridgeBurningMontecarloTreeSearch",
+    "player2_name": "OnlineEvolution",
+    "n_games": 100,
+    "budget": 3,
+    "wins1": 35,
+    "wins2": 60,
+    "ties": 5,
+    "player_1_forward_model_visits": 18191.27,
+    "player_1_visited_states": 10460.28,
+    "player_2_forward_model_visits": 42603.66,
+    "player_2_visited_states": 982.91,
+    "p_value": 0.0004001852145547602,
+    "processing_time": 1770.524065732956,
+    "date": "2023-05-25",
+    "hour": "16:00:38"
+}

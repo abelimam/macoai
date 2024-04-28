@@ -1,0 +1,19 @@
+{
+    "game_name": "HeroAcademy",
+    "heuristic_name": "Simple",
+    "player1_name": "BridgeBurningMontecarloTreeSearch",
+    "player2_name": "Random",
+    "n_games": 100,
+    "budget": 0.5,
+    "wins1": 32,
+    "wins2": 68,
+    "ties": 0,
+    "player_1_forward_model_visits": 10031.93,
+    "player_1_visited_states": 17287.43,
+    "player_2_forward_model_visits": 0.0,
+    "player_2_visited_states": 0.0,
+    "p_value": 3.5586299307333036e-07,
+    "processing_time": 2771.2010765075684,
+    "date": "2023-05-06",
+    "hour": "01:02:40"
+}

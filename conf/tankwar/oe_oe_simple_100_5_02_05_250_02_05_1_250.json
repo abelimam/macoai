@@ -1,0 +1,23 @@
+{
+    "game_name": "TankWar",
+    "n_games": 100,
+    "budget": 5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player1_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "population_size": 250
+    },
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "random_new_valid_action": true,
+        "population_size": 250
+    },
+    "result_file": "out/tankwar/oe_oe_simple_100_5_02_05_250_02_05_1_250.json"
+}

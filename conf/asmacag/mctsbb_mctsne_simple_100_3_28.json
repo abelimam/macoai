@@ -1,0 +1,15 @@
+{
+    "game_name": "Asmacag",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "BridgeBurningMontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 2.8
+    },
+    "player2_name": "NonExploringMontecarloTreeSearch",
+    "result_file": "out/asmacag/mctsbb_mctsne_simple_100_3_28.json"
+}

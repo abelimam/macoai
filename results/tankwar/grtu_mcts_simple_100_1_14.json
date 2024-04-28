@@ -1,0 +1,19 @@
+{
+    "game_name": "TankWar",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "MontecarloTreeSearch",
+    "n_games": 100,
+    "budget": 1,
+    "wins1": 9,
+    "wins2": 91,
+    "ties": 0,
+    "player_1_forward_model_visits": 12295.31,
+    "player_1_visited_states": 7642.56,
+    "player_2_forward_model_visits": 14598.3,
+    "player_2_visited_states": 12877.73,
+    "p_value": 0.0,
+    "processing_time": 10519.192296266556,
+    "date": "2023-05-12",
+    "hour": "04:26:44"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "HeroAcademy",
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player2_name": "MontecarloTreeSearch",
+    "n_games": 100,
+    "budget": 1,
+    "wins1": 70,
+    "wins2": 30,
+    "ties": 0,
+    "player_1_forward_model_visits": 34821.63,
+    "player_1_visited_states": 31508.85,
+    "player_2_forward_model_visits": 35712.37,
+    "player_2_visited_states": 31421.87,
+    "p_value": 1.5417257914762672e-08,
+    "processing_time": 10463.103284597397,
+    "date": "2023-05-08",
+    "hour": "14:57:40"
+}

@@ -1,0 +1,23 @@
+{
+    "game_name": "Asmacag",
+    "n_games": 100,
+    "budget": 3,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player1_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "population_size": 200
+    },
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.5,
+        "random_new_valid_action": true,
+        "population_size": 200
+    },
+    "result_file": "out/asmacag/oe_oe_simple_100_3_02_05_200_02_05_1_200.json"
+}
