@@ -1,4 +1,4 @@
-3860497953833876247
+5926840181180677094
 MacoGameParameters(board_size=6, action_points_per_turn=3, pieces_per_player=50, special_pieces_per_type=2, win_condition_length=5, seed=None)
 GreedyTurnPlayer GreedyActionPlayer
 Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
