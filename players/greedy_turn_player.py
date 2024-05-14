@@ -2,7 +2,7 @@ from typing import List
 from games import Action, Observation, ForwardModel
 from heuristics import Heuristic
 from players import Player
-from players.greedy_turn.greedy_turn_node import GreedyTurnNode
+from players.greedy_turn import GreedyTurnNode
 import math
 import time
 

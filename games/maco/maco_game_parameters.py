@@ -3,8 +3,8 @@ from games import GameParameters
 
 class MacoGameParameters(GameParameters):
     def __init__(self,
-                 board_size: int = 6,
-                 action_points_per_turn: int = 3,
+                 board_size: int = 5,
+                 action_points_per_turn: int = 2,
                  pieces_per_player: int = 50,
                  special_pieces_per_type: int = 2,
                  win_condition_length: int = 5,

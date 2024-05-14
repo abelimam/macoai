@@ -41,39 +41,27 @@ class MontecarloTreeSearchNode:
     def rollout(self, forward_model: 'ForwardModel', visited: defaultdict) -> Tuple[float, int]:
         """Performs a random rollout from the `Node` and returns the reward."""
         new_observation = self.observation.clone()
-        fm_visitis = 0
-        while not forward_model.is_terminal(new_observation)\
-                and not forward_model.is_turn_finished(new_observation):
-            forward_model.step(new_observation, new_observation.get_random_action())
+        fm_visits = 0
+        while not forward_model.is_terminal(new_observation) and not forward_model.is_turn_finished(new_observation):
+            action = new_observation.get_random_action()
+            forward_model.step(new_observation, action)
             visited[new_observation] += 1
-            fm_visitis += 1
+            fm_visits += 1
         
-        return self.heuristic.get_reward(new_observation), fm_visitis
+        return self.heuristic.get_reward(new_observation), fm_visits
     
     def full_rollout(self, forward_model: 'ForwardModel', visited: defaultdict) -> Tuple[float, int]:
-        """Performs a random rollout from the `Node` and returns the reward."""
+        """Performs a full rollout from the `Node` and returns the reward."""
         new_observation = self.observation.clone()
         fm_visits = 0
-        while not forward_model.is_terminal(new_observation)\
-                and not forward_model.is_turn_finished(new_observation):
-            forward_model.step(new_observation, new_observation.get_random_action())
-            visited[new_observation] += 1
-            fm_visits += 1
+        while not forward_model.is_terminal(new_observation):
+            while not forward_model.is_turn_finished(new_observation):
+                action = new_observation.get_random_action()
+                forward_model.step(new_observation, action)
+                visited[new_observation] += 1
+                fm_visits += 1
+            forward_model.on_turn_ended(new_observation)
         reward = self.heuristic.get_reward(new_observation)
-
-        turn_changed = False
-        forward_model.on_turn_ended(new_observation)
-        for _ in range(fm_visits, self.observation.get_game_parameters().get_action_points_per_turn() - 1):
-            if forward_model.is_terminal(new_observation):
-                break
-            forward_model.step(new_observation, new_observation.get_random_action())
-            visited[new_observation] += 1
-            fm_visits += 1
-            turn_changed = True
-
-        if turn_changed:
-            reward -= self.heuristic.get_reward(new_observation)
-
         return reward, fm_visits
     
     def get_best_action(self, observation: 'Observation', forward_model: 'ForwardModel', visited: defaultdict) -> Tuple['Action', int]:
@@ -97,28 +85,14 @@ class MontecarloTreeSearchNode:
         """Performs a deterministic rollout from the `Node` and returns the reward."""
         new_observation = self.observation.clone()
         fm_visits = 0
-        while not forward_model.is_terminal(new_observation)\
-                and not forward_model.is_turn_finished(new_observation):
-            best_action, fvisits = self.get_best_action(new_observation, forward_model, visited)
-            forward_model.step(new_observation, best_action)
-            visited[new_observation] += 1
-            fm_visits += fvisits
+        while not forward_model.is_terminal(new_observation):
+            while not forward_model.is_turn_finished(new_observation):
+                action = new_observation.get_random_action()
+                forward_model.step(new_observation, action)
+                visited[new_observation] += 1
+                fm_visits += 1
+            forward_model.on_turn_ended(new_observation)
         reward = self.heuristic.get_reward(new_observation)
-
-        turn_changed = False
-        forward_model.on_turn_ended(new_observation)
-        for _ in range(fm_visits, self.observation.get_game_parameters().get_action_points_per_turn() - 1):
-            if forward_model.is_terminal(new_observation):
-                break
-            best_action, fvisits = self.get_best_action(new_observation, forward_model, visited)
-            forward_model.step(new_observation, best_action)
-            visited[new_observation] += 1
-            fm_visits += fvisits
-            turn_changed = True
-
-        if turn_changed:
-            reward -= self.heuristic.get_reward(new_observation)
-
         return reward, fm_visits
     
     def reward_children(self) -> None:
