@@ -6,7 +6,6 @@ class SimpleHeuristic(Heuristic):
     """Defines a simple reward for the current player."""
 
     def get_reward(self, observation: 'Observation'):
-        """Returns a reward for the current player."""
         board = observation.board
         board_size = observation.game_parameters.board_size
 
@@ -19,6 +18,9 @@ class SimpleHeuristic(Heuristic):
         # Adjust the reward based on the current player's turn
         if observation.get_current_turn() == 1:
             reward *= -1
+
+        # Add additional reward for disturbing opponent's line
+        reward += self.calculate_disturbance_reward(observation)
 
         return reward
 
@@ -71,3 +73,56 @@ class SimpleHeuristic(Heuristic):
             max_line_length = max(max_line_length, consecutive_count)
 
         return max_line_length ** 10
+
+    def calculate_disturbance_reward(self, observation: 'Observation'):
+        board = observation.board
+        board_size = observation.game_parameters.board_size
+        current_player = observation.get_current_turn()
+        opponent_player = 1 - current_player
+
+        disturbance_reward = 0
+
+        # Check for disturbance by placing a piece
+        for i in range(board_size):
+            for j in range(board_size):
+                if board.get((i, j)) == current_player:
+                    if self.disturbs_opponent_line(board, i, j, opponent_player):
+                        disturbance_reward += 1
+
+        # Check for disturbance by exploding
+        for piece in observation.player_0_pieces.get_pieces() if current_player == 0 else observation.player_1_pieces.get_pieces():
+            if piece.get_piece_type() == "EXPLODE":
+                for position in observation.get_actions():
+                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player):
+                        disturbance_reward += 1
+
+        # Check for disturbance by blocking
+        for piece in observation.player_0_pieces.get_pieces() if current_player == 0 else observation.player_1_pieces.get_pieces():
+            if piece.get_piece_type() == "BLOCK":
+                for position in observation.get_actions():
+                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player):
+                        disturbance_reward += 1
+
+        return disturbance_reward
+
+    def disturbs_opponent_line(self, board, row, col, opponent_player):
+        directions = [(0, 1), (1, 0), (1, 1), (1, -1)]
+
+        for dx, dy in directions:
+            count = 0
+            r, c = row, col
+            while 0 <= r < len(board) and 0 <= c < len(board) and board.get((r, c)) == opponent_player:
+                count += 1
+                r += dx
+                c += dy
+
+            r, c = row - dx, col - dy
+            while 0 <= r < len(board) and 0 <= c < len(board) and board.get((r, c)) == opponent_player:
+                count += 1
+                r -= dx
+                c -= dy
+
+            if count >= 2:
+                return True
+
+        return False
