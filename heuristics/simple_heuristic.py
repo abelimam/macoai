@@ -86,27 +86,28 @@ class SimpleHeuristic(Heuristic):
         for i in range(board_size):
             for j in range(board_size):
                 if board.get((i, j)) == current_player:
-                    if self.disturbs_opponent_line(board, i, j, opponent_player):
+                    if self.disturbs_opponent_line(board, i, j, opponent_player, observation.game_parameters):
                         disturbance_reward += 1
 
         # Check for disturbance by exploding
         for piece in observation.player_0_pieces.get_pieces() if current_player == 0 else observation.player_1_pieces.get_pieces():
             if piece.get_piece_type() == "EXPLODE":
                 for position in observation.get_actions():
-                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player):
+                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player, observation.game_parameters):
                         disturbance_reward += 1
 
         # Check for disturbance by blocking
         for piece in observation.player_0_pieces.get_pieces() if current_player == 0 else observation.player_1_pieces.get_pieces():
             if piece.get_piece_type() == "BLOCK":
                 for position in observation.get_actions():
-                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player):
+                    if self.disturbs_opponent_line(board, position[0], position[1], opponent_player, observation.game_parameters):
                         disturbance_reward += 1
 
         return disturbance_reward
 
-    def disturbs_opponent_line(self, board, row, col, opponent_player):
+    def disturbs_opponent_line(self, board, row, col, opponent_player, game_parameters):
         directions = [(0, 1), (1, 0), (1, 1), (1, -1)]
+        winning_length = game_parameters.win_condition_length
 
         for dx, dy in directions:
             count = 0
@@ -122,7 +123,7 @@ class SimpleHeuristic(Heuristic):
                 r -= dx
                 c -= dy
 
-            if count >= 2:
+            if count == winning_length - 2 or count == winning_length - 1:
                 return True
 
         return False
