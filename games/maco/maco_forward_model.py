@@ -119,8 +119,8 @@ class MacoForwardModel(ForwardModel):
         if game_state.board[(x, y)] is not None:
             return False
 
-        game_state.board[(x, y)] = "B"
-        game_state.blocked_rows[x] = 3  # Store the blocked row and set the duration to 3 moves
+        # game_state.board[(x, y)] = "B"
+        game_state.blocked_rows[x] = game_state.game_parameters.action_points_per_turn
         return True
 
     def update_score(self, game_state: Union['MacoGameState', 'MacoObservation']) -> bool:
@@ -135,9 +135,9 @@ class MacoForwardModel(ForwardModel):
         if self.check_for_win(game_state):
             # If there is a winner, significantly increase their score
             if game_state.current_turn == 0:
-                player_0_score += 1000000  # Adjust the value as needed
+                player_0_score += 1000000
             else:
-                player_1_score += 1000000  # Adjust the value as needed
+                player_1_score += 1000000
 
         game_state.player_0_score = player_0_score
         game_state.player_1_score = player_1_score
