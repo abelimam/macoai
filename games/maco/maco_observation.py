@@ -46,14 +46,8 @@ class MacoObservation(Observation):
         pieces = self.player_0_pieces if self.current_turn == 0 else self.player_1_pieces
         piece = action.get_piece()
         position = action.get_position()
-
-        print(f"Checking action validity: {action}")
-        print(f"Current player pieces: {pieces}")
-
         if not self.can_place_piece(position):
-            print(f"Cannot place piece at position {position}")
             return False
-        print(f"Can place piece at position {position}")
         return True
 
     def can_place_piece(self, position: Tuple[int, int]) -> bool:
