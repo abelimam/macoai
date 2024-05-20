@@ -14,7 +14,13 @@ class MacoForwardModel(ForwardModel):
         game_state.action_points_left -= 1
         pieces = game_state.player_0_pieces if game_state.current_turn == 0 else game_state.player_1_pieces
 
-        if action is None:
+        if isinstance(game_state, MacoGameState):
+            observation = game_state.get_observation()
+        else:
+            observation = game_state
+
+        if action is None or not observation.is_action_valid(action):
+            self.give_invalid_action_penalty(game_state)
             return False
 
         action_pos = action.get_position()
@@ -23,6 +29,7 @@ class MacoForwardModel(ForwardModel):
         if action_pos is not None and action_piece.get_piece_type() == MacoPieceType.REGULAR:
             x, y = action_pos
             if game_state.board[action_pos] is not None or x in game_state.blocked_rows:
+                self.give_invalid_action_penalty(game_state)
                 return False  # Disallow placing a piece in a blocked row or occupied position
             game_state.board[action_pos] = game_state.current_turn
             pieces.remove_piece(action_piece)
@@ -32,8 +39,10 @@ class MacoForwardModel(ForwardModel):
         if action_pos is not None and action_piece.get_piece_type() == MacoPieceType.EXPLODE:
             x, y = action_pos
             if x in game_state.blocked_rows:
+                self.give_invalid_action_penalty(game_state)
                 return False  # Disallow exploding a piece in a blocked row
             if not self.explode_position(game_state, action_pos):
+                self.give_invalid_action_penalty(game_state)
                 return False
             pieces.remove_piece(action_piece)
             self.update_score(game_state)
@@ -41,6 +50,7 @@ class MacoForwardModel(ForwardModel):
 
         if action_pos is not None and action_piece.get_piece_type() == MacoPieceType.BLOCK:
             if not self.block_position(game_state, action_pos):
+                self.give_invalid_action_penalty(game_state)
                 return False
             pieces.remove_piece(action_piece)
             self.update_score(game_state)
@@ -62,8 +72,16 @@ class MacoForwardModel(ForwardModel):
 
         for row in rows_to_remove:
             del game_state.blocked_rows[row]
+
     def is_terminal(self, game_state: Union['MacoGameState', 'MacoObservation']) -> bool:
-        return self.check_for_win(game_state) or self.check_for_draw(game_state)
+        if self.check_for_win(game_state):
+            return True
+        elif self.check_for_draw(game_state):
+            game_state.player_0_score = 0
+            game_state.player_1_score = 0
+            return True
+        else:
+            return False
 
     def is_turn_finished(self, observation: Union['MacoGameState', 'MacoObservation']) -> bool:
         return observation.get_action_points_left() == 0
@@ -138,6 +156,10 @@ class MacoForwardModel(ForwardModel):
                 player_0_score += 1000000
             else:
                 player_1_score += 1000000
+        elif self.is_terminal(game_state):
+            # If the game has ended without a winner, set the scores to be equal (tie)
+            player_0_score = 0
+            player_1_score = 0
 
         game_state.player_0_score = player_0_score
         game_state.player_1_score = player_1_score
@@ -193,3 +215,12 @@ class MacoForwardModel(ForwardModel):
             max_line_length = max(max_line_length, consecutive_count)
 
         return max_line_length ** 2
+
+    def give_invalid_action_penalty(self, game_state: Union['MacoGameState', 'MacoObservation']) -> None:
+        """Applies a penalty score to the current player for an invalid action."""
+        penalty_score = -10  # Adjust the penalty score as needed
+        if game_state.current_turn == 0:
+            game_state.player_0_score += penalty_score
+        else:
+            game_state.player_1_score += penalty_score
+

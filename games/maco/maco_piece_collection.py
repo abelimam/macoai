@@ -7,10 +7,29 @@ class MacoPieceCollection:
         self.pieces: List['MacoPiece'] = []
 
     def clone(self) -> 'MacoPieceCollection':
-        new_collection = MacoPieceCollection()
+        """Creates a deep copy of the `MacoPieceCollection` and returns it."""
+        new_piece_collection = MacoPieceCollection()
+
         for piece in self.pieces:
-            new_collection.add_piece(piece.clone())
-        return new_collection
+            new_piece_collection.add_piece(piece.clone())
+
+        return new_piece_collection
+
+    def copy_into(self, other: 'MacoPieceCollection') -> None:
+        """Deep copies the `MacoPieceCollection` contents into another one."""
+        if len(self) >= len(other):
+            for piece_index in range(len(other)):
+                self.get_piece(piece_index).copy_into(other.get_piece(piece_index))
+
+            for piece in range(len(other), len(self.pieces)):
+                other.add_piece(self.pieces[piece].clone())
+
+        else:
+            del other.pieces[len(self):]
+            for piece_index in range(len(self)):
+                self.get_piece(piece_index).copy_into(other.get_piece(piece_index))
+
+
 
     def add_piece(self, piece: 'MacoPiece') -> None:
         self.pieces.append(piece)
@@ -24,6 +43,10 @@ class MacoPieceCollection:
 
     def remove_pieces_in_position(self, pos: Tuple[int, int]) -> None:
         self.pieces = [piece for piece in self.pieces if piece.get_pos() != pos]
+
+    def get_piece(self, index: int) -> 'MacoPiece':
+        """Returns the `MacoPiece` contained in the `MacoPieceCollection` at the specified index."""
+        return self.pieces[index]
 
     def get_pieces(self) -> List['MacoPiece']:
         return self.pieces
@@ -49,6 +72,9 @@ class MacoPieceCollection:
 
     def get_block_positions(self) -> List[Tuple[int, int]]:
         return [piece.get_pos() for piece in self.pieces if piece.get_piece_type() == MacoPieceType.BLOCK]
+
+    def __len__(self):
+        return len(self.pieces)
 
     def __str__(self) -> str:
         return f"Regular: {self.get_regular_positions()}, Explode: {self.get_explode_positions()}, Block: {self.get_block_positions()}"
