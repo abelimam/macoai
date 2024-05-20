@@ -29,8 +29,6 @@ class MacoPieceCollection:
             for piece_index in range(len(self)):
                 self.get_piece(piece_index).copy_into(other.get_piece(piece_index))
 
-
-
     def add_piece(self, piece: 'MacoPiece') -> None:
         self.pieces.append(piece)
 

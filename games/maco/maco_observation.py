@@ -47,20 +47,16 @@ class MacoObservation(Observation):
         piece = action.get_piece()
         position = action.get_position()
 
-        if piece.get_piece_type() == MacoPieceType.REGULAR:
-            return self.can_place_piece(position)
-        elif piece.get_piece_type() == MacoPieceType.EXPLODE:
-            return self.can_explode_piece(position, pieces)
-        elif piece.get_piece_type() == MacoPieceType.BLOCK:
-            return self.can_block_piece(position)
+        print(f"Checking action validity: {action}")
+        print(f"Current player pieces: {pieces}")
+
+        if not self.can_place_piece(position):
+            print(f"Cannot place piece at position {position}")
+            return False
+        print(f"Can place piece at position {position}")
+        return True
 
     def can_place_piece(self, position: Tuple[int, int]) -> bool:
-        return self.board[position] is None
-
-    def can_explode_piece(self, position: Tuple[int, int], pieces: 'MacoPieceCollection') -> bool:
-        return position in pieces.get_explode_positions()
-
-    def can_block_piece(self, position: Tuple[int, int]) -> bool:
         return self.board[position] is None
 
     def get_actions(self) -> List['MacoAction']:

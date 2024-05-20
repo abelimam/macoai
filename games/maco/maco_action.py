@@ -18,9 +18,6 @@ class MacoAction(Action):
     def get_piece(self) -> 'MacoPiece':
         return self.piece
 
-    def get_pos(self) -> Tuple[int, int]:
-        return self.pos
-
     def get_position(self) -> Tuple[int, int]:
         return self.pos
 

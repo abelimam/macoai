@@ -55,7 +55,7 @@ class MacoFitnessEvaluator(FitnessEvaluator):
         """Converts an `Action` to an int parameter for N-Tuple Bandit Online Evolution."""
         if action.get_piece().get_piece_type() == MacoPieceType.REGULAR:
             # Convert the position to a parameter value
-            pos = action.get_pos()
+            pos = action.get_position()
             if pos is not None:
                 row, col = pos
                 return row * 10 + col  # Assuming a 10x10 board size
@@ -63,7 +63,7 @@ class MacoFitnessEvaluator(FitnessEvaluator):
                 return -1
         elif action.get_piece().get_piece_type() == MacoPieceType.EXPLODE:
             # Convert the explode action to a parameter value
-            pos = action.get_pos()
+            pos = action.get_position()
             if pos is not None:
                 row, col = pos
                 explode_pos = self.get_adjacent_position_index(row, col)
@@ -72,7 +72,7 @@ class MacoFitnessEvaluator(FitnessEvaluator):
                 return -1
         elif action.get_piece().get_piece_type() == MacoPieceType.BLOCK:
             # Convert the block action to a parameter value
-            pos = action.get_pos()
+            pos = action.get_position()
             if pos is not None:
                 row, _ = pos
                 return 200 + row  # Assuming 200 is the offset for block actions

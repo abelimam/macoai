@@ -11,8 +11,10 @@ class MacoForwardModel(ForwardModel):
         super().__init__()
 
     def step(self, game_state: Union['MacoGameState', 'MacoObservation'], action: 'MacoAction') -> bool:
+        print("Step 1: MacoForwardModel.step() called")
         game_state.action_points_left -= 1
         pieces = game_state.player_0_pieces if game_state.current_turn == 0 else game_state.player_1_pieces
+        print("Step 2: Action points decremented and current player's pieces retrieved")
 
         if isinstance(game_state, MacoGameState):
             observation = game_state.get_observation()
@@ -20,8 +22,10 @@ class MacoForwardModel(ForwardModel):
             observation = game_state
 
         if action is None or not observation.is_action_valid(action):
+            print("Step 3: Action validity checked - Invalid action")
             self.give_invalid_action_penalty(game_state)
             return False
+        print("Step 3: Action validity checked - Valid action")
 
         action_pos = action.get_position()
         action_piece = action.get_piece()
@@ -37,15 +41,16 @@ class MacoForwardModel(ForwardModel):
             return True
 
         if action_pos is not None and action_piece.get_piece_type() == MacoPieceType.EXPLODE:
-            x, y = action_pos
-            if x in game_state.blocked_rows:
-                self.give_invalid_action_penalty(game_state)
-                return False  # Disallow exploding a piece in a blocked row
+            print("Step 4: Explode piece action")
             if not self.explode_position(game_state, action_pos):
+                print("Step 5: Explode position failed")
                 self.give_invalid_action_penalty(game_state)
                 return False
+            print("Step 5: Explode position successful")
             pieces.remove_piece(action_piece)
+            print("Step 7: Explode piece removed from player's pieces")
             self.update_score(game_state)
+            print("Step 8: Scores updated")
             return True
 
         if action_pos is not None and action_piece.get_piece_type() == MacoPieceType.BLOCK:
@@ -118,18 +123,20 @@ class MacoForwardModel(ForwardModel):
                     return False
         return True
 
-    def explode_position(self, game_state: Union['MacoGameState', 'MacoObservation'], position: Tuple[int, int]) -> bool:
+    def explode_position(self, game_state: Union['MacoGameState', 'MacoObservation'],
+                         position: Tuple[int, int]) -> bool:
         board_size = game_state.game_parameters.board_size
         x, y = position
-        if game_state.board[(x, y)] is None:
+
+        if game_state.board[(x, y)] is not None:
+            print("Step 6: Play position is not empty")
             return False
 
-        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+        print("Step 6: Play position is empty")
+        for dx, dy in [(0, 0), (0, 1), (0, -1), (1, 0), (-1, 0)]:
             nx, ny = x + dx, y + dy
             if 0 <= nx < board_size and 0 <= ny < board_size:
                 game_state.board[(nx, ny)] = None
-
-        game_state.board[(x, y)] = None
         return True
 
     def block_position(self, game_state: Union['MacoGameState', 'MacoObservation'], position: Tuple[int, int]) -> bool:
@@ -143,7 +150,6 @@ class MacoForwardModel(ForwardModel):
 
     def update_score(self, game_state: Union['MacoGameState', 'MacoObservation']) -> bool:
         board_size = game_state.game_parameters.board_size
-        win_length = game_state.game_parameters.win_condition_length
 
         # Calculate scores for each player based on the longest line
         player_0_score = self.calculate_player_score(game_state.board, board_size, 0)
