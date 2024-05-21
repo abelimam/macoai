@@ -142,8 +142,8 @@ class MacoForwardModel(ForwardModel):
         board_size = game_state.game_parameters.board_size
 
         # Calculate scores for each player based on the longest line
-        player_0_score = self.calculate_player_score(game_state.board, board_size, 0)
-        player_1_score = self.calculate_player_score(game_state.board, board_size, 1)
+        player_0_score = self.calculate_player_score(game_state, game_state.board, board_size, 0)
+        player_1_score = self.calculate_player_score(game_state, game_state.board, board_size, 1)
 
         # Check for a winner
         if self.check_for_win(game_state):
@@ -162,53 +162,47 @@ class MacoForwardModel(ForwardModel):
 
         return True
 
-    def calculate_player_score(self, board, board_size, player):
+    def calculate_player_score(self, game_state, board, board_size, player):
         """Calculates the score for a player based on the longest line."""
         max_line_length = 0
+        win_length = game_state.game_parameters.win_condition_length
 
-        # Check vertical lines
-        for col in range(board_size):
-            consecutive_count = 0
-            for row in range(board_size):
-                if board[(row, col)] == player:
-                    consecutive_count += 1
-                else:
-                    max_line_length = max(max_line_length, consecutive_count)
-                    consecutive_count = 0
-            max_line_length = max(max_line_length, consecutive_count)
+        # Define the directions to check
+        directions = [
+            (1, 0),  # Vertical
+            (0, 1),  # Horizontal
+            (1, 1),  # Diagonal (top-left to bottom-right)
+            (1, -1),  # Diagonal (top-right to bottom-left)
+        ]
 
-        # Check horizontal lines
-        for row in range(board_size):
-            consecutive_count = 0
-            for col in range(board_size):
-                if board[(row, col)] == player:
-                    consecutive_count += 1
-                else:
-                    max_line_length = max(max_line_length, consecutive_count)
-                    consecutive_count = 0
-            max_line_length = max(max_line_length, consecutive_count)
-
-        # Check diagonal lines (top-left to bottom-right)
+        # Iterate over each position on the board
         for i in range(board_size):
-            consecutive_count = 0
-            for j in range(board_size - i):
-                if board[(i + j, j)] == player:
-                    consecutive_count += 1
-                else:
-                    max_line_length = max(max_line_length, consecutive_count)
+            for j in range(board_size):
+                # Check each direction from the current position
+                for dx, dy in directions:
                     consecutive_count = 0
-            max_line_length = max(max_line_length, consecutive_count)
+                    empty_count = 0
+                    opponent_encountered = False
+                    x, y = i, j
 
-        # Check diagonal lines (top-right to bottom-left)
-        for i in range(board_size):
-            consecutive_count = 0
-            for j in range(board_size - i):
-                if board[(j, i + j)] == player:
-                    consecutive_count += 1
-                else:
-                    max_line_length = max(max_line_length, consecutive_count)
-                    consecutive_count = 0
-            max_line_length = max(max_line_length, consecutive_count)
+                    # Traverse in the current direction
+                    while 0 <= x < board_size and 0 <= y < board_size:
+                        if board[(x, y)] == player:
+                            if not opponent_encountered:
+                                consecutive_count += 1
+                        elif board[(x, y)] is None:
+                            if not opponent_encountered:
+                                empty_count += 1
+                        else:
+                            opponent_encountered = True
+                            break
+
+                        x += dx
+                        y += dy
+
+                    # Update the maximum line length if applicable
+                    if consecutive_count > 0 and consecutive_count + empty_count >= win_length:
+                        max_line_length = max(max_line_length, consecutive_count)
 
         return max_line_length ** 2
 

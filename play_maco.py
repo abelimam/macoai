@@ -26,7 +26,7 @@ if __name__ == '__main__':
         os.makedirs(save_directory)  # Creates the directory and any intermediate directories if they don't exist
 
     # Common parameters
-    budget = 1                                  # Time to think for the players (in seconds)
+    budget = 5                                  # Time to think for the players (in seconds)
     rounds = 100                                # Number of rounds to play
     verbose = True                              # Whether to print messages
     enforce_time = False                         # Whether the player time to think is going to be enforced
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
     ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
 
-    players = [greedy, greedyt]  # List of players
+    players = [mcts, greedyt]  # List of players
 
     game.set_save_file(save_name)
 

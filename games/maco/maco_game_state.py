@@ -98,11 +98,11 @@ class MacoGameState(GameState):
         return (
             f"TURN: {self.current_turn!s}\n"
             f"BOARD:\n{self.board_to_string()}"
-            f"BOARD:\n{self.board}"
+            f"BOARD:\n{self.board}\n"
             # f"PIECES P1: {self.player_0_pieces!s}\n"
-            # f"SCORE P1: {self.player_0_score!s}\n"
+            f"SCORE P1: {self.player_0_score!s}\n"
             # f"PIECES P2: {self.player_1_pieces!s}\n"
-            # f"SCORE P2: {self.player_1_score!s}\n"
+            f"SCORE P2: {self.player_1_score!s}\n"
             # f"ACTION POINTS LEFT: {self.action_points_left!s}"
         )
 # endregion
