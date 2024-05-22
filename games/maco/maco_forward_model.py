@@ -134,8 +134,8 @@ class MacoForwardModel(ForwardModel):
         if game_state.board[(x, y)] is not None:
             return False
 
-        # game_state.board[(x, y)] = "B"
         game_state.blocked_rows[x] = game_state.game_parameters.action_points_per_turn
+        game_state.board[(x, y)] = None
         return True
 
     def update_score(self, game_state: Union['MacoGameState', 'MacoObservation']) -> bool:
@@ -167,44 +167,50 @@ class MacoForwardModel(ForwardModel):
         max_line_length = 0
         win_length = game_state.game_parameters.win_condition_length
 
-        # Define the directions to check
-        directions = [
-            (1, 0),  # Vertical
-            (0, 1),  # Horizontal
-            (1, 1),  # Diagonal (top-left to bottom-right)
-            (1, -1),  # Diagonal (top-right to bottom-left)
-        ]
+        def check_direction(start_x, start_y, dx, dy):
+            consecutive_count = 0
+            empty_count = 0
+            x, y = start_x, start_y
 
-        # Iterate over each position on the board
+            while 0 <= x < board_size and 0 <= y < board_size:
+                if board[(x, y)] == player:
+                    consecutive_count += 1
+                elif board[(x, y)] is None:
+                    empty_count += 1
+                else:
+                    break
+
+                if consecutive_count + empty_count >= win_length:
+                    break
+
+                x += dx
+                y += dy
+
+            if consecutive_count > 0 and consecutive_count + empty_count >= win_length:
+                return consecutive_count
+            return 0
+
+        # Check vertical lines
+        for col in range(board_size):
+            for row in range(board_size):
+                max_line_length = max(max_line_length, check_direction(row, col, 1, 0))
+
+        # Check horizontal lines
+        for row in range(board_size):
+            for col in range(board_size):
+                max_line_length = max(max_line_length, check_direction(row, col, 0, 1))
+
+        # Check diagonal lines (top-left to bottom-right)
         for i in range(board_size):
-            for j in range(board_size):
-                # Check each direction from the current position
-                for dx, dy in directions:
-                    consecutive_count = 0
-                    empty_count = 0
-                    opponent_encountered = False
-                    x, y = i, j
+            max_line_length = max(max_line_length, check_direction(i, 0, 1, 1))
+            max_line_length = max(max_line_length, check_direction(0, i, 1, 1))
 
-                    # Traverse in the current direction
-                    while 0 <= x < board_size and 0 <= y < board_size:
-                        if board[(x, y)] == player:
-                            if not opponent_encountered:
-                                consecutive_count += 1
-                        elif board[(x, y)] is None:
-                            if not opponent_encountered:
-                                empty_count += 1
-                        else:
-                            opponent_encountered = True
-                            break
+        # Check diagonal lines (top-right to bottom-left)
+        for i in range(board_size):
+            max_line_length = max(max_line_length, check_direction(i, board_size - 1, 1, -1))
+            max_line_length = max(max_line_length, check_direction(0, i, 1, -1))
 
-                        x += dx
-                        y += dy
-
-                    # Update the maximum line length if applicable
-                    if consecutive_count > 0 and consecutive_count + empty_count >= win_length:
-                        max_line_length = max(max_line_length, consecutive_count)
-
-        return max_line_length ** 2
+        return max_line_length
 
     def give_invalid_action_penalty(self, game_state: Union['MacoGameState', 'MacoObservation']) -> None:
         """Applies a penalty score to the current player for an invalid action."""
