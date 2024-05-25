@@ -15,6 +15,9 @@ if __name__ == '__main__':
     mcts_heuristic = SimpleHeuristic()
     ## Online Evolution
     oe_heuristic = SimpleHeuristic()
+
+    genetic_heuristic = SimpleHeuristic()
+
     ## NTuple Bandit Online Evolution
     dimensions = [38, 38, 38]  # Update based on Maco's action space
     ntboe_heuristic = SimpleHeuristic()
@@ -44,15 +47,17 @@ if __name__ == '__main__':
     always_first = AlwaysFirstPlayer()
     greedy = GreedyActionPlayer(greedy_heuristic)
     greedyt = GreedyTurnPlayer(greedyt_heuristic)
-    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 8)
+    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 5)
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
     oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
+    genetic = GeneticPlayer(genetic_heuristic, population_size=100, chromosome_length=5, mutation_rate=0.15, elite_rate=0.1, generations=50)
+
 
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
     ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
 
-    players = [mcts, greedy]  # List of players
+    players = [genetic, greedy]  # List of players
 
     game.set_save_file(save_name)
 

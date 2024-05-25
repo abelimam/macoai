@@ -1,16 +1,25 @@
-6180634323580500322
-MacoGameParameters(board_size=5, action_points_per_turn=3, pieces_per_player=100, special_pieces_per_type=2, win_condition_length=4, seed=None)
-MontecarloTreeSearchPlayer[8] GreedyActionPlayer
-Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
-Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
+7651762214587553451
+MacoGameParameters(board_size=6, action_points_per_turn=3, pieces_per_player=100, special_pieces_per_type=0, win_condition_length=6, seed=None)
+GeneticPlayer GreedyActionPlayer
+Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [], Block: []
+Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [], Block: []
 0
 0
-0 Action[MacoPiece[REGULAR, None], (2, 1)]
-0 Action[MacoPiece[REGULAR, None], (1, 0)]
-0 Action[MacoPiece[REGULAR, None], (3, 2)]
-1 Action[MacoPiece[REGULAR, None], (4, 3)]
+0 Action[MacoPiece[REGULAR, None], (0, 1)]
+0 Action[MacoPiece[REGULAR, None], (0, 2)]
+0 Action[MacoPiece[REGULAR, None], (0, 0)]
+1 Action[MacoPiece[REGULAR, None], (0, 3)]
 1 Action[MacoPiece[REGULAR, None], (1, 3)]
 1 Action[MacoPiece[REGULAR, None], (2, 3)]
-0 Action[MacoPiece[EXPLODE, None], (4, 4)]
-0 Action[MacoPiece[REGULAR, None], (4, 3)]
-0 Action[MacoPiece[EXPLODE, None], (1, 2)]
+0 Action[MacoPiece[REGULAR, None], (0, 4)]
+0 Action[MacoPiece[REGULAR, None], (0, 5)]
+0 Action[MacoPiece[REGULAR, None], (1, 1)]
+1 Action[MacoPiece[REGULAR, None], (3, 3)]
+1 Action[MacoPiece[REGULAR, None], (2, 1)]
+1 Action[MacoPiece[REGULAR, None], (4, 3)]
+0 Action[MacoPiece[REGULAR, None], (1, 2)]
+0 Action[MacoPiece[REGULAR, None], (1, 4)]
+0 Action[MacoPiece[REGULAR, None], (3, 4)]
+1 Action[MacoPiece[REGULAR, None], (5, 3)]
+1 Action[MacoPiece[REGULAR, None], (2, 4)]
+1 Action[MacoPiece[REGULAR, None], (2, 2)]
