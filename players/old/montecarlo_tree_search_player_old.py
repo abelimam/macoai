@@ -4,8 +4,6 @@ from players.montecarlo_tree_search import MontecarloTreeSearchNode
 from players import Player
 import time
 
-# Ali
-
 class MontecarloTreeSearchPlayer(Player):
     """Entity that plays a game by using the Monte Carlo Tree Search algorithm to choose all actions in a turn."""
     def __init__(self, heuristic: 'Heuristic', c_value: float):
@@ -20,6 +18,7 @@ class MontecarloTreeSearchPlayer(Player):
 
 # region Methods
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:
+        """Computes a list of actions for a complete turn using the Monte Carlo Tree Search algorithm and returns them in order each time it's called during the turn."""
         self.turn.clear()
 
         # compute the turn
@@ -27,7 +26,6 @@ class MontecarloTreeSearchPlayer(Player):
         root = MontecarloTreeSearchNode(observation, self.heuristic, None)
         self.forward_model_visits += root.extend(forward_model, self.visited_states)
         current_node = root
-        action_points_per_turn = observation.get_game_parameters().get_action_points_per_turn()
 
         while time.time() - t0 < budget - 0.12:
             best_child = current_node.get_best_child_by_ucb(self.c_value)
@@ -48,7 +46,7 @@ class MontecarloTreeSearchPlayer(Player):
 
         # retrieve the turn
         current_node = root
-        for _ in range(action_points_per_turn):
+        for _ in range(observation.get_game_parameters().get_action_points_per_turn()):
             best_child = current_node.get_best_child_by_average()
             if best_child is None:
                 break

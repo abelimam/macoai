@@ -1,28 +1,16 @@
-5338627054200552550
-MacoGameParameters(board_size=10, action_points_per_turn=3, pieces_per_player=50, special_pieces_per_type=2, win_condition_length=6, seed=None)
-GreedyActionPlayer GreedyTurnPlayer
-Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
-Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
+6180634323580500322
+MacoGameParameters(board_size=5, action_points_per_turn=3, pieces_per_player=100, special_pieces_per_type=2, win_condition_length=4, seed=None)
+MontecarloTreeSearchPlayer[8] GreedyActionPlayer
+Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
+Regular: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None], Explode: [None, None], Block: [None, None]
 0
 0
-0 Action[MacoPiece[REGULAR, None], (0, 0)]
-0 Action[MacoPiece[REGULAR, None], (0, 1)]
-0 Action[MacoPiece[REGULAR, None], (0, 2)]
-1 Action[MacoPiece[REGULAR, None], (0, 3)]
-1 Action[MacoPiece[REGULAR, None], (0, 4)]
-1 Action[MacoPiece[REGULAR, None], (0, 5)]
-0 Action[MacoPiece[REGULAR, None], (0, 6)]
+0 Action[MacoPiece[REGULAR, None], (2, 1)]
 0 Action[MacoPiece[REGULAR, None], (1, 0)]
-0 Action[MacoPiece[REGULAR, None], (2, 0)]
-1 Action[MacoPiece[REGULAR, None], (0, 7)]
-1 Action[MacoPiece[REGULAR, None], (0, 8)]
-1 Action[MacoPiece[EXPLODE, None], (1, 6)]
-0 Action[MacoPiece[REGULAR, None], (0, 6)]
-0 Action[MacoPiece[REGULAR, None], (3, 0)]
-0 Action[MacoPiece[REGULAR, None], (4, 0)]
-1 Action[MacoPiece[REGULAR, None], (0, 9)]
-1 Action[MacoPiece[REGULAR, None], (1, 4)]
-1 Action[MacoPiece[REGULAR, None], (5, 0)]
-0 Action[MacoPiece[EXPLODE, None], (5, 1)]
-0 Action[MacoPiece[REGULAR, None], (5, 0)]
-0 Action[MacoPiece[EXPLODE, None], (1, 3)]
+0 Action[MacoPiece[REGULAR, None], (3, 2)]
+1 Action[MacoPiece[REGULAR, None], (4, 3)]
+1 Action[MacoPiece[REGULAR, None], (1, 3)]
+1 Action[MacoPiece[REGULAR, None], (2, 3)]
+0 Action[MacoPiece[EXPLODE, None], (4, 4)]
+0 Action[MacoPiece[REGULAR, None], (4, 3)]
+0 Action[MacoPiece[EXPLODE, None], (1, 2)]

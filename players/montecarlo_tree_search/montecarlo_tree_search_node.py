@@ -7,6 +7,7 @@ import random
 import sys
 import numpy as np
 
+# Ali
 
 class MontecarloTreeSearchNode:
     def __init__(self, observation: 'Observation', heuristic: 'Heuristic', action: 'Action',
@@ -132,11 +133,11 @@ class MontecarloTreeSearchNode:
 
     def backpropagate(self, reward: float) -> None:
         """Backpropagates the reward to the `Node` and its parents."""
-        self.visit(reward)
-        parent = self.parent
-        while parent is not None:
-            parent.visit(reward)
-            parent = parent.parent
+        node = self
+        while node is not None:
+            node.visits += 1
+            node.reward += reward
+            node = node.parent
 
     # endregion
 
@@ -164,21 +165,21 @@ class MontecarloTreeSearchNode:
 
     def get_best_child_by_ucb(self, c_value: float) -> 'MontecarloTreeSearchNode':
         """Returns the child of the `Node` with the highest UCB value."""
-        best_child = self.children[0]
-        best_ucb = -math.inf
+        if not self.children:
+            return None
 
+        # Calculate UCB values for all child nodes
+        ucb_values = []
         for child in self.children:
-            epsilon = random.random() / 1000
-            if c_value == 0:
-                ucb = child.get_average_reward()
-            elif child.visits != 0:
-                ucb = child.get_average_reward() + c_value * math.sqrt(math.log(self.visits) / child.visits) + epsilon
+            if child.visits == 0:
+                ucb_value = sys.float_info.max
             else:
-                ucb = sys.float_info.max - epsilon
-            if ucb > best_ucb:
-                best_child = child
-                best_ucb = ucb
-        return best_child
+                ucb_value = child.get_average_reward() + c_value * math.sqrt(math.log(self.visits) / child.visits)
+            ucb_values.append(ucb_value)
+
+        # Select the child node with the highest UCB value
+        best_index = np.argmax(ucb_values)
+        return self.children[best_index]
 
     def get_random_child(self) -> 'MontecarloTreeSearchNode':
         """Returns a random child of the `Node`."""
