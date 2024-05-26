@@ -1,0 +1,17 @@
+{
+    "game_name": "Maco",
+    "n_games": 100,
+    "budget": 0.5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player1_config": {
+        "population_size": 125,
+        "mutation_rate": 0.15,
+        "survival_rate": 0.15
+    },
+    "player2_name": "Random",
+    "result_file": "out/maco/oe_rand_simple_100_05_125_015_015.json"
+}

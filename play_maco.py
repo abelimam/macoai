@@ -47,17 +47,17 @@ if __name__ == '__main__':
     always_first = AlwaysFirstPlayer()
     greedy = GreedyActionPlayer(greedy_heuristic)
     greedyt = GreedyTurnPlayer(greedyt_heuristic)
-    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 5)
+    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 8)
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
     oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
-    genetic = GeneticPlayer(genetic_heuristic, population_size=125, chromosome_length=3, mutation_rate=0.15, elite_rate=0.15, generations=100)
+    genetic = GeneticPlayer(genetic_heuristic, 150, 0.2, 0.15, 100)
 
 
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
     ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
 
-    players = [genetic, oe]  # List of players
+    players = [mcts, oe]  # List of players
 
     game.set_save_file(save_name)
 

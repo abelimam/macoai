@@ -16,7 +16,7 @@ class MontecarloTreeSearchPlayer(Player):
         self.full_rollout = False
 
     def set_full_rollout_on(self):
-        self.full_rollout = True
+        self.full_rollout = False
 
 # region Methods
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:

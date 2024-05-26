@@ -34,17 +34,17 @@ class TurnGenome:
             # choose a random parent and add action at index if valid, otherwise use the other parent
             added = False
             if bool(random.getrandbits(1)):
-                if (len(parent_a.actions) >= i) and observation.is_action_valid(parent_a.actions[i]):
+                if (len(parent_a.actions) > i) and observation.is_action_valid(parent_a.actions[i]):
                     parent_a.actions[i].copy_into(self.actions[i])
                     added = True
-                elif (len(parent_b.actions) >= i) and observation.is_action_valid(parent_b.actions[i]):
+                elif (len(parent_b.actions) > i) and observation.is_action_valid(parent_b.actions[i]):
                     parent_b.actions[i].copy_into(self.actions[i])
                     added = True
             else:
-                if (len(parent_b.actions) >= i) and observation.is_action_valid(parent_b.actions[i]):
+                if (len(parent_b.actions) > i) and observation.is_action_valid(parent_b.actions[i]):
                     parent_b.actions[i].copy_into(self.actions[i])
                     added = True
-                elif (len(parent_a.actions) >= i) and observation.is_action_valid(parent_a.actions[i]):
+                elif (len(parent_a.actions) > i) and observation.is_action_valid(parent_a.actions[i]):
                     parent_a.actions[i].copy_into(self.actions[i])
                     added = True
 

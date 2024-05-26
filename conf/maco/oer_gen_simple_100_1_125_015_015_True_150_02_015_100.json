@@ -1,0 +1,24 @@
+{
+    "game_name": "Maco",
+    "n_games": 100,
+    "budget": 1,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player1_config": {
+        "population_size": 125,
+        "mutation_rate": 0.15,
+        "survival_rate": 0.15,
+        "random_new_valid_action": true
+    },
+    "player2_name": "Genetic",
+    "player2_config": {
+        "population_size": 150,
+        "mutation_rate": 0.2,
+        "elite_rate": 0.15,
+        "generations": 100
+    },
+    "result_file": "out/maco/oer_gen_simple_100_1_125_015_015_True_150_02_015_100.json"
+}

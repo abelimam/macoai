@@ -1,0 +1,16 @@
+{
+    "game_name": "Maco",
+    "n_games": 100,
+    "budget": 5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyAction",
+    "player2_name": "MontecarloTreeSearch",
+    "player2_config": {
+        "c_value": 1.4,
+        "full_rollout_on": true
+    },
+    "result_file": "out/maco/grac_mctsf_simple_100_5_14_True.json"
+}

@@ -5,22 +5,25 @@ from heuristics import Heuristic
 from players.player import Player
 from players.genetic.genetic_algorithm import GeneticAlgorithm, Chromosome
 
+
 class GeneticPlayer(Player):
-    def __init__(self, heuristic: Heuristic, population_size: int, chromosome_length: int, mutation_rate: float, elite_rate: float, generations: int):
+    def __init__(self, heuristic: Heuristic, population_size: int, mutation_rate: float, elite_rate: float, generations: int):
         super().__init__()
         self.heuristic = heuristic
         self.population_size = population_size
-        self.chromosome_length = chromosome_length
         self.mutation_rate = mutation_rate
         self.elite_rate = elite_rate
         self.generations = generations
-        self.ga = GeneticAlgorithm(population_size, chromosome_length, mutation_rate, elite_rate)
         self.actions: List[Action] = []
 
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:
         self.actions = []
         current_observation = observation.clone()
-        population = self.ga.initialize_population(observation)
+
+        chromosome_length = observation.get_game_parameters().get_action_points_per_turn()
+        self.ga = GeneticAlgorithm(self.population_size, chromosome_length, self.mutation_rate, self.elite_rate)
+
+        population = self.ga.initialize_population(current_observation)
 
         start_time = time.time()
         generation = 0

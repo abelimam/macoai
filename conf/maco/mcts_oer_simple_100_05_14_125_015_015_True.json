@@ -1,0 +1,21 @@
+{
+    "game_name": "Maco",
+    "n_games": 100,
+    "budget": 0.5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 1.4
+    },
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "population_size": 125,
+        "mutation_rate": 0.15,
+        "survival_rate": 0.15,
+        "random_new_valid_action": true
+    },
+    "result_file": "out/maco/mcts_oer_simple_100_05_14_125_015_015_True.json"
+}
