@@ -20,7 +20,7 @@ class GeneticPlayer(Player):
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:
         self.actions = []
         current_observation = observation.clone()
-        population = self.ga.initialize_population()
+        population = self.ga.initialize_population(observation)
 
         start_time = time.time()
         generation = 0
@@ -42,21 +42,21 @@ class GeneticPlayer(Player):
         def evaluate(chromosome: Chromosome) -> float:
             action_points = observation.get_game_parameters().get_action_points_per_turn()
             cloned_observation = observation.clone()
+            cumulative_reward = 0.0
 
             for i in range(action_points):
                 action = self.decode_gene(chromosome[i], cloned_observation)
                 forward_model.step(cloned_observation, action)
+                cumulative_reward += self.heuristic.get_reward(cloned_observation)
 
-            return self.heuristic.get_reward(cloned_observation)
-
-        return evaluate
+            return cumulative_reward
 
         return evaluate
 
     def decode_gene(self, gene: int, observation: 'Observation') -> 'Action':
         actions = observation.get_actions()
-        if actions:
-            return actions[gene % len(actions)]
+        if 0 <= gene < len(actions):
+            return actions[gene]
         else:
             return observation.get_random_action()
 

@@ -1,5 +1,6 @@
 import random
 from typing import List, Tuple
+from games import Observation
 
 class Chromosome:
     def __init__(self, genes: List[int]):
@@ -22,8 +23,8 @@ class GeneticAlgorithm:
         self.mutation_rate = mutation_rate
         self.elite_rate = elite_rate
 
-    def initialize_population(self) -> List[Chromosome]:
-        return [Chromosome([random.randint(0, 1) for _ in range(self.chromosome_length)])
+    def initialize_population(self, observation: 'Observation') -> List[Chromosome]:
+        return [Chromosome([random.randint(0, len(observation.get_actions()) - 1) for _ in range(self.chromosome_length)])
                 for _ in range(self.population_size)]
 
     def evaluate_fitness(self, population: List[Chromosome], fitness_function) -> None:

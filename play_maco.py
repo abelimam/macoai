@@ -51,7 +51,7 @@ if __name__ == '__main__':
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
     oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
-    genetic = GeneticPlayer(genetic_heuristic, population_size=100, chromosome_length=5, mutation_rate=0.15, elite_rate=0.1, generations=50)
+    genetic = GeneticPlayer(genetic_heuristic, population_size=125, chromosome_length=3, mutation_rate=0.15, elite_rate=0.15, generations=100)
 
 
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)

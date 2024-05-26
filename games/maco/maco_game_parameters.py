@@ -7,7 +7,7 @@ class MacoGameParameters(GameParameters):
                  action_points_per_turn: int = 3,
                  pieces_per_player: int = 100,
                  special_pieces_per_type: int = 0,
-                 win_condition_length: int = 6,
+                 win_condition_length: int = 5,
                  seed: Optional[int] = None):
         self.board_size = board_size
         self.action_points_per_turn = action_points_per_turn
