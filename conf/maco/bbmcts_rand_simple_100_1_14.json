@@ -1,6 +1,6 @@
 {
     "game_name": "Maco",
-    "n_games": 100,
+    "n_games": 10,
     "budget": 1,
     "rounds": 100,
     "verbose": false,
