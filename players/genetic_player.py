@@ -1,4 +1,5 @@
 import time
+from collections import defaultdict
 from typing import List
 from games import Action, Observation, ForwardModel
 from heuristics import Heuristic
@@ -15,6 +16,8 @@ class GeneticPlayer(Player):
         self.elite_rate = elite_rate
         self.generations = generations
         self.actions: List[Action] = []
+        self.forward_model_visits = 0
+        self.visited_states = defaultdict(int)
 
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:
         self.actions = []
@@ -30,7 +33,8 @@ class GeneticPlayer(Player):
         best_fitness = float('-inf')
 
         while time.time() - start_time < budget:
-            population = self.ga.evolve(population, self.fitness_function(current_observation, forward_model), current_observation)
+            population = self.ga.evolve(population, self.fitness_function(current_observation, forward_model),
+                                        current_observation)
             best_chromosome = max(population, key=lambda chromosome: chromosome.fitness)
 
             if best_chromosome.fitness > best_fitness:
@@ -38,8 +42,6 @@ class GeneticPlayer(Player):
                 self.decode_chromosome(best_chromosome, current_observation, forward_model)
 
             generation += 1
-
-        print(f"Generations: {generation}, Best Fitness: {best_fitness}")
 
     def fitness_function(self, observation: 'Observation', forward_model: 'ForwardModel'):
         def evaluate(chromosome: Chromosome) -> float:
@@ -51,6 +53,8 @@ class GeneticPlayer(Player):
                 action = self.decode_gene(chromosome[i], cloned_observation)
                 if action is not None and cloned_observation.is_action_valid(action):
                     forward_model.step(cloned_observation, action)
+                    self.forward_model_visits += 1
+                    self.visited_states[cloned_observation] += 1
                     cumulative_reward += self.heuristic.get_reward(cloned_observation)
                 else:
                     cumulative_reward -= 1.0  # Penalize invalid actions
@@ -74,6 +78,14 @@ class GeneticPlayer(Player):
             if action is not None and observation.is_action_valid(action):
                 self.actions.append(action)
                 forward_model.step(observation, action)
+                self.forward_model_visits += 1
+                self.visited_states[observation] += 1
+
+    def get_forward_model_visits(self) -> int:
+        return self.forward_model_visits
+
+    def get_visited_states_count(self) -> int:
+        return sum(self.visited_states.values())
 
     def get_action(self, index: int) -> 'Action':
         if index < len(self.actions):

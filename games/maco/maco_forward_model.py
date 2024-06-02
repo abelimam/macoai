@@ -214,7 +214,7 @@ class MacoForwardModel(ForwardModel):
 
     def give_invalid_action_penalty(self, game_state: Union['MacoGameState', 'MacoObservation']) -> None:
         """Applies a penalty score to the current player for an invalid action."""
-        penalty_score = -10  # Adjust the penalty score as needed
+        penalty_score = -10
         if game_state.current_turn == 0:
             game_state.player_0_score += penalty_score
         else:

@@ -129,7 +129,7 @@ if __name__ == '__main__':
     player1 = get_player(game_name, player1_name, heuristic, player1_config)
     player2 = get_player(game_name, player2_name, heuristic, player2_config)
 
-    print("Game           : {}".format(game_name))
+    print("\nGame           : {}".format(game_name))
     print("Heuristic      : {}".format(heuristic_name))
     print("Player1        : {}".format(player1_name))
     print("Player2        : {}".format(player2_name))
