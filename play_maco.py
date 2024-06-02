@@ -57,7 +57,7 @@ if __name__ == '__main__':
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
     ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
 
-    players = [mcts, oe]  # List of players
+    players = [genetic, oe]  # List of players
 
     game.set_save_file(save_name)
 

@@ -62,10 +62,12 @@ class GeneticAlgorithm:
     def mutate(self, chromosome: Chromosome, observation: 'Observation') -> None:
         for i in range(len(chromosome)):
             if random.random() < self.mutation_rate:
-                if random.random() < 0.5:
-                    chromosome[i] = 1 - chromosome[i]
-                else:
-                    chromosome[i] = random.randint(0, len(observation.get_actions()) - 1)
+                actions = observation.get_actions()
+                if actions:
+                    if random.random() < 0.5:
+                        chromosome[i] = 1 - chromosome[i]
+                    else:
+                        chromosome[i] = random.randint(0, len(actions) - 1)
 
     def evolve(self, population: List[Chromosome], fitness_function, observation: 'Observation') -> List[Chromosome]:
         self.evaluate_fitness(population, fitness_function)

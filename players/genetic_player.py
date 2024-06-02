@@ -49,8 +49,11 @@ class GeneticPlayer(Player):
 
             for i in range(action_points):
                 action = self.decode_gene(chromosome[i], cloned_observation)
-                forward_model.step(cloned_observation, action)
-                cumulative_reward += self.heuristic.get_reward(cloned_observation)
+                if action is not None and cloned_observation.is_action_valid(action):
+                    forward_model.step(cloned_observation, action)
+                    cumulative_reward += self.heuristic.get_reward(cloned_observation)
+                else:
+                    cumulative_reward -= 1.0  # Penalize invalid actions
 
             return cumulative_reward
 
@@ -61,15 +64,16 @@ class GeneticPlayer(Player):
         if 0 <= gene < len(actions):
             return actions[gene]
         else:
-            return observation.get_random_action()
+            return None
 
     def decode_chromosome(self, chromosome: Chromosome, observation: 'Observation',
                           forward_model: 'ForwardModel') -> None:
         action_points = observation.get_game_parameters().get_action_points_per_turn()
         for i in range(action_points):
             action = self.decode_gene(chromosome[i], observation)
-            self.actions.append(action)
-            forward_model.step(observation, action)
+            if action is not None and observation.is_action_valid(action):
+                self.actions.append(action)
+                forward_model.step(observation, action)
 
     def get_action(self, index: int) -> 'Action':
         if index < len(self.actions):

@@ -1,4 +1,5 @@
-__all__ = ('get_onlineevolution_conf', 'get_onlineevolution_random_conf', 'get_montecarlotreesearch_conf', 'get_montecarlotreesearch_full_conf', 'get_bridgeburningmontecarlotreesearch_conf')
+__all__ = ('get_genetic_conf', 'get_onlineevolution_conf', 'get_onlineevolution_random_conf', 'get_montecarlotreesearch_conf', 'get_montecarlotreesearch_full_conf', 'get_bridgeburningmontecarlotreesearch_conf')
 
+from .gen_configuration import get_genetic_conf
 from .oe_configuration import get_onlineevolution_conf, get_onlineevolution_random_conf
 from .mcts_configuration import get_montecarlotreesearch_conf, get_montecarlotreesearch_full_conf, get_bridgeburningmontecarlotreesearch_conf

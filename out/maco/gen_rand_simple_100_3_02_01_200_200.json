@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "Genetic",
+    "player2_name": "Random",
+    "n_games": 2,
+    "budget": 3,
+    "wins1": 2,
+    "wins2": 0,
+    "ties": 0,
+    "player_1_forward_model_visits": 0.0,
+    "player_1_visited_states": 0.0,
+    "player_2_forward_model_visits": 0.0,
+    "player_2_visited_states": 0.0,
+    "p_value": 0.04550026389635842,
+    "processing_time": 18.574913024902344,
+    "date": "2024-06-03",
+    "hour": "01:29:54"
+}
