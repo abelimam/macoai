@@ -1,0 +1,15 @@
+{
+    "game_name": "Maco",
+    "n_games": 10,
+    "budget": 1,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "BridgeBurningMontecarloTreeSearch",
+    "player2_config": {
+        "c_value": 1.4
+    },
+    "result_file": "out/maco/grtu_mctsbb_simple_100_1_14.json"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "OnlineEvolution",
+    "n_games": 10,
+    "budget": 5,
+    "wins1": 9,
+    "wins2": 0,
+    "ties": 1,
+    "player_1_forward_model_visits": 3083.6,
+    "player_1_visited_states": 1946.9,
+    "player_2_forward_model_visits": 4526.7,
+    "player_2_visited_states": 29.7,
+    "p_value": 5.227865783274943e-05,
+    "processing_time": 294.33080220222473,
+    "date": "2024-06-04",
+    "hour": "01:15:46"
+}

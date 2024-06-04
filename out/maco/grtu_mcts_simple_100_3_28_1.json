@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "MontecarloTreeSearch",
+    "n_games": 10,
+    "budget": 3,
+    "wins1": 5,
+    "wins2": 1,
+    "ties": 4,
+    "player_1_forward_model_visits": 4463.0,
+    "player_1_visited_states": 3037.9,
+    "player_2_forward_model_visits": 4193.2,
+    "player_2_visited_states": 3084.1,
+    "p_value": 0.05096193696776341,
+    "processing_time": 416.5390479564667,
+    "date": "2024-06-04",
+    "hour": "01:12:30"
+}

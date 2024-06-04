@@ -26,6 +26,8 @@ class BridgeBurningMontecarloTreeSearchPlayer(Player):
             t0 = time.time()
             while time.time() - t0 < budget_round - 0.05:
                 best_child = current_node.get_best_child_by_ucb(self.c_value)
+                if best_child is None:
+                    break
                 if best_child.get_amount_of_children() > 0:
                     current_node = best_child
                 else:

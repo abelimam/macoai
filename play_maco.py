@@ -23,7 +23,6 @@ if __name__ == '__main__':
     ntboe_heuristic = SimpleHeuristic()
 
     save_name = "out/maco_output.txt"  # Where the game is going to be saved, can be None
-    # Ensure the directory exists
     save_directory = os.path.dirname(save_name)  # Extracts the directory part from the save_name path
     if save_directory and not os.path.exists(save_directory):  # Checks if the directory part is not empty and does not exist
         os.makedirs(save_directory)  # Creates the directory and any intermediate directories if they don't exist
@@ -32,7 +31,7 @@ if __name__ == '__main__':
     budget = 5                                  # Time to think for the players (in seconds)
     rounds = 100                                # Number of rounds to play
     verbose = True                              # Whether to print messages
-    enforce_time = False                         # Whether the player time to think is going to be enforced
+    enforce_time = True                         # Whether the player time to think is going to be enforced
     save_name = "out/maco_output.txt"           # Where the game is going to be saved, can be None
 
     # MACO parameters
@@ -57,7 +56,7 @@ if __name__ == '__main__':
     # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
     ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
 
-    players = [genetic, oe]  # List of players
+    players = [greedy, genetic]  # List of players
 
     game.set_save_file(save_name)
 

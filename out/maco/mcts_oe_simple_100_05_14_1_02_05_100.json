@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player2_name": "OnlineEvolution",
+    "n_games": 10,
+    "budget": 0.5,
+    "wins1": 6,
+    "wins2": 1,
+    "ties": 3,
+    "player_1_forward_model_visits": 796.5,
+    "player_1_visited_states": 752.3,
+    "player_2_forward_model_visits": 1454.3,
+    "player_2_visited_states": 72.4,
+    "p_value": 0.019076322101778453,
+    "processing_time": 83.34093046188354,
+    "date": "2024-06-04",
+    "hour": "01:43:40"
+}

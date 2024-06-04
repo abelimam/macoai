@@ -20,7 +20,7 @@ if __name__ == '__main__':
                     # Basic configuration
                     conf = {
                         "game_name": game,
-                        "n_games": 2,
+                        "n_games": 10,
                         "budget": buget,
                         "rounds": 100,
                         "verbose": False,

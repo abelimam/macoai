@@ -1,0 +1,21 @@
+{
+    "game_name": "Maco",
+    "n_games": 10,
+    "budget": 1,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player1_config": {
+        "c_value": 1.4
+    },
+    "player2_name": "Genetic",
+    "player2_config": {
+        "mutation_rate": 0.2,
+        "elite_rate": 0.1,
+        "population_size": 150,
+        "generations": 200
+    },
+    "result_file": "out/maco/mcts_gen_simple_100_1_14_02_01_150_200.json"
+}
