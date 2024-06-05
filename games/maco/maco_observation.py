@@ -57,25 +57,24 @@ class MacoObservation(Observation):
         actions = []
         pieces = self.player_0_pieces if self.current_turn == 0 else self.player_1_pieces
 
-        # Generate actions for regular pieces
-        regular_pieces = pieces.get_regular_pieces()
-        if regular_pieces:
-            piece = regular_pieces[0]
-            for position in self.get_empty_positions():
+        # Generate actions for each empty position
+        for position in self.get_empty_positions():
+            # Generate actions for regular pieces
+            regular_pieces = pieces.get_regular_pieces()
+            if regular_pieces:
+                piece = regular_pieces[0]
                 actions.append(MacoAction(piece, position))
 
-        # Generate actions for explode pieces
-        explode_pieces = pieces.get_explode_pieces()
-        if explode_pieces:
-            piece = explode_pieces[0]
-            for position in self.get_empty_positions():
+            # Generate actions for explode pieces
+            explode_pieces = pieces.get_explode_pieces()
+            if explode_pieces:
+                piece = explode_pieces[0]
                 actions.append(MacoAction(piece, position))
 
-        # Generate actions for block pieces
-        block_pieces = pieces.get_block_pieces()
-        if block_pieces:
-            piece = block_pieces[0]
-            for position in self.get_empty_positions():
+            # Generate actions for block pieces
+            block_pieces = pieces.get_block_pieces()
+            if block_pieces:
+                piece = block_pieces[0]
                 actions.append(MacoAction(piece, position))
 
         return actions

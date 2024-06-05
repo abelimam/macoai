@@ -5,15 +5,15 @@
     "player2_name": "Genetic",
     "n_games": 100,
     "budget": 5,
-    "wins1": 100,
-    "wins2": 0,
-    "ties": 0,
+    "wins1": 39,
+    "wins2": 38,
+    "ties": 23,
     "player_1_forward_model_visits": 0.0,
     "player_1_visited_states": 0.0,
-    "player_2_forward_model_visits": 248.68,
-    "player_2_visited_states": 248.32,
-    "p_value": 0.0,
-    "processing_time": 915.8307063579559,
+    "player_2_forward_model_visits": 7027.57,
+    "player_2_visited_states": 7025.81,
+    "p_value": 0.8844604198251671,
+    "processing_time": 3253.1878616809845,
     "date": "2024-06-05",
-    "hour": "07:09:22"
+    "hour": "19:28:27"
 }

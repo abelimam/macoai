@@ -7,4 +7,4 @@ def play_game(game_conf: str):
 
 if __name__ == "__main__":
     conf_files = list(map(str, Path("conf/maco").rglob("*.json")))
-    Parallel(n_jobs=8, backend='multiprocessing')(delayed(play_game)(i) for i in conf_files)
+    Parallel(n_jobs=4, backend='multiprocessing')(delayed(play_game)(i) for i in conf_files)
