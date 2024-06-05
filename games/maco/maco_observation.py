@@ -82,9 +82,10 @@ class MacoObservation(Observation):
 
     def get_random_action(self) -> 'MacoAction':
         actions = self.get_actions()
-        if not actions:
+        regular_actions = [action for action in actions if action.get_piece().get_piece_type() == MacoPieceType.REGULAR]
+        if not regular_actions:
             return None
-        return random.choice(actions)
+        return random.choice(regular_actions)
 
     def get_empty_positions(self) -> List[Tuple[int, int]]:
         empty_positions = []
