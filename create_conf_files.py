@@ -3,7 +3,7 @@ from conf.players_config import *
 
 
 if __name__ == '__main__':
-    budgets = [0.5, 1, 3, 5]
+    budgets = [5]
     players = ['GreedyAction', 'GreedyTurn', 'MontecarloTreeSearch', 'MontecarloTreeSearch_Full', 'BridgeBurningMontecarloTreeSearch', 'NonExploringMontecarloTreeSearch', \
                 'Genetic', 'OnlineEvolution', 'OnlineEvolution_Random', 'Random']
     players_code = ['grac', 'grtu', 'mcts', 'mcts', 'mctsbb', 'mctsne', 'gen', 'oe', 'oe', 'rand']
@@ -20,7 +20,7 @@ if __name__ == '__main__':
                     # Basic configuration
                     conf = {
                         "game_name": game,
-                        "n_games": 10,
+                        "n_games": 100,
                         "budget": buget,
                         "rounds": 100,
                         "verbose": False,
