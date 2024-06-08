@@ -32,7 +32,7 @@ class GeneticAlgorithm:
             chromosome.fitness = fitness_function(chromosome)
 
     def select_parents(self, population: List[Chromosome]) -> Tuple[Chromosome, Chromosome]:
-        tournament_size = 5
+        tournament_size = 10  
         tournament_candidates = random.sample(population, tournament_size)
         parent1 = max(tournament_candidates, key=lambda chromosome: chromosome.fitness)
         tournament_candidates = random.sample(population, tournament_size)
