@@ -5,15 +5,15 @@
     "player2_name": "MontecarloTreeSearch",
     "n_games": 100,
     "budget": 5,
-    "wins1": 91,
-    "wins2": 4,
+    "wins1": 86,
+    "wins2": 9,
     "ties": 5,
     "player_1_forward_model_visits": 0.0,
     "player_1_visited_states": 0.0,
-    "player_2_forward_model_visits": 2896.82,
-    "player_2_visited_states": 1474.78,
+    "player_2_forward_model_visits": 3741.86,
+    "player_2_visited_states": 1800.16,
     "p_value": 0.0,
-    "processing_time": 1739.9805104732513,
+    "processing_time": 1814.5555310249329,
     "date": "2024-06-07",
-    "hour": "03:16:06"
+    "hour": "07:58:51"
 }

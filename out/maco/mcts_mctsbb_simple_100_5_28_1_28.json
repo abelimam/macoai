@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "MontecarloTreeSearch",
+    "player2_name": "BridgeBurningMontecarloTreeSearch",
+    "n_games": 100,
+    "budget": 5,
+    "wins1": 16,
+    "wins2": 68,
+    "ties": 16,
+    "player_1_forward_model_visits": 5109.71,
+    "player_1_visited_states": 3352.42,
+    "player_2_forward_model_visits": 4340.88,
+    "player_2_visited_states": 3945.5,
+    "p_value": 9.348077867343818e-14,
+    "processing_time": 8782.657194137573,
+    "date": "2024-06-08",
+    "hour": "01:45:25"
+}

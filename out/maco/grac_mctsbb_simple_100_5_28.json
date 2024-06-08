@@ -5,15 +5,15 @@
     "player2_name": "BridgeBurningMontecarloTreeSearch",
     "n_games": 100,
     "budget": 5,
-    "wins1": 24,
-    "wins2": 43,
-    "ties": 33,
+    "wins1": 16,
+    "wins2": 45,
+    "ties": 39,
     "player_1_forward_model_visits": 0.0,
     "player_1_visited_states": 0.0,
-    "player_2_forward_model_visits": 5975.16,
-    "player_2_visited_states": 5156.63,
-    "p_value": 0.004420801738403979,
-    "processing_time": 3892.91694521904,
+    "player_2_forward_model_visits": 7783.8,
+    "player_2_visited_states": 6461.56,
+    "p_value": 8.432351541243222e-06,
+    "processing_time": 4258.163980960846,
     "date": "2024-06-07",
-    "hour": "03:16:33"
+    "hour": "08:25:18"
 }
