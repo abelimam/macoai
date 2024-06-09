@@ -54,8 +54,9 @@ class MacoGameState(GameState):
         pieces = MacoPieceCollection()
         for _ in range(pieces_per_player):
             pieces.add_piece(MacoPiece(MacoPieceType.REGULAR))
-        for _ in range(self.game_parameters.special_pieces_per_type):
+        for _ in range(self.game_parameters.explode_per_player):
             pieces.add_piece(MacoPiece(MacoPieceType.EXPLODE))
+        for _ in range(self.game_parameters.block_per_player):
             pieces.add_piece(MacoPiece(MacoPieceType.BLOCK))
         return pieces
 

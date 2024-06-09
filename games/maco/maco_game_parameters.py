@@ -6,13 +6,15 @@ class MacoGameParameters(GameParameters):
                  board_size: int = 8,
                  action_points_per_turn: int = 3,
                  pieces_per_player: int = 100,
-                 special_pieces_per_type: int = 0,
+                 explode_per_player: int = 0,
+                 block_per_player: int = 0,
                  win_condition_length: int = 6,
                  seed: Optional[int] = None):
         self.board_size = board_size
         self.action_points_per_turn = action_points_per_turn
         self.pieces_per_player = pieces_per_player
-        self.special_pieces_per_type = special_pieces_per_type
+        self.explode_per_player = explode_per_player
+        self.block_per_player = block_per_player
         self.win_condition_length = win_condition_length
         self.seed = seed
 
@@ -25,8 +27,11 @@ class MacoGameParameters(GameParameters):
     def get_pieces_per_player(self) -> int:
         return self.pieces_per_player
 
-    def get_special_pieces_per_type(self) -> int:
-        return self.special_pieces_per_type
+    def get_explode_per_player(self) -> int:
+        return self.explode_per_player
+
+    def get_block_per_player(self) -> int:
+        return self.block_per_player
 
     def get_win_condition_length(self) -> int:
         return self.win_condition_length
@@ -40,7 +45,8 @@ class MacoGameParameters(GameParameters):
             f"board_size={self.board_size}, "
             f"action_points_per_turn={self.action_points_per_turn}, "
             f"pieces_per_player={self.pieces_per_player}, "
-            f"special_pieces_per_type={self.special_pieces_per_type}, "
+            f"explode_per_player={self.explode_per_player}, "
+            f"block_per_player={self.block_per_player}, "
             f"win_condition_length={self.win_condition_length}, "
             f"seed={self.seed})"
         )
