@@ -81,12 +81,6 @@ class GeneticPlayer(Player):
                 self.forward_model_visits += 1
                 self.visited_states[observation] += 1
 
-    def get_forward_model_visits(self) -> int:
-        return self.forward_model_visits
-
-    def get_visited_states_count(self) -> int:
-        return sum(self.visited_states.values())
-
     def get_action(self, index: int) -> 'Action':
         if index < len(self.actions):
             return self.actions[index]
