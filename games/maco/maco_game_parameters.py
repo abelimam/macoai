@@ -6,7 +6,7 @@ class MacoGameParameters(GameParameters):
                  board_size: int = 8,
                  action_points_per_turn: int = 3,
                  pieces_per_player: int = 100,
-                 explode_per_player: int = 1,
+                 explode_per_player: int = 0,
                  block_per_player: int = 0,
                  win_condition_length: int = 6,
                  seed: Optional[int] = None):
