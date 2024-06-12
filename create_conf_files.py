@@ -4,18 +4,17 @@ from conf.players_config import *
 
 if __name__ == '__main__':
     budgets = [5]
-    players = ['GreedyAction', 'GreedyTurn', 'MontecarloTreeSearch', 'MontecarloTreeSearch_Full', 'BridgeBurningMontecarloTreeSearch', 'NonExploringMontecarloTreeSearch', \
-                'Genetic', 'OnlineEvolution', 'OnlineEvolution_Random', 'Random']
-    players_code = ['grac', 'grtu', 'mcts', 'mcts', 'mctsbb', 'mctsne', 'gen', 'oe', 'oe', 'rand']
-    non_config = ['Random', 'GreedyAction', 'GreedyTurn', 'NonExploringMontecarloTreeSearch']
+    players = ['GreedyAction', 'GreedyTurn', 'MontecarloTreeSearch', 'BridgeBurningMontecarloTreeSearch', \
+                'Genetic', 'Random']
+    players_code = ['grac', 'grtu', 'mcts', 'mctsbb', 'gen', 'rand']
+    non_config = ['Random', 'GreedyAction', 'GreedyTurn']
     games = ['Maco']
 
     for game in games:
         for buget in budgets:
             for i in range(len(players)):
                 for j in range(i + 1, len(players)):
-                    if (players[i] in non_config and players[j] in non_config) or (players[i] == 'NTupleBanditOnlineEvolution' or players[j] == 'NTupleBanditOnlineEvolution'):
-                        continue
+                    
 
                     # Basic configuration
                     conf = {

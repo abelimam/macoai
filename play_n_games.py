@@ -90,7 +90,12 @@ def stat_test(point1: int, point2: int, n: int) -> float:
 
     # Pooled proportion
     p = (w1 + w2) / (n1 + n2)
-
+    
+    if p == 0:
+        p = 1e-16
+    elif p == 1:
+        p = 1 - 1e-16
+    
     # Standard error
     se = math.sqrt(p*(1-p)*(1/n1 + 1/n2))
 
