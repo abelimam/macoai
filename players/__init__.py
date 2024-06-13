@@ -1,5 +1,5 @@
 __all__ = ('Player', 'GeneticPlayer', 'HumanPlayer', 'RandomPlayer', 'AlwaysFirstPlayer', 'GreedyActionPlayer', 'GreedyTurnPlayer', \
-           'MontecarloTreeSearchPlayer', 'OnlineEvolutionPlayer', 'NTupleBanditOnlineEvolutionPlayer', \
+           'MontecarloTreeSearchPlayer', 'OnlineEvolutionPlayer', \
             'BridgeBurningMontecarloTreeSearchPlayer', 'NonExploringMontecarloTreeSearchPlayer')
 
 from .player import Player
@@ -12,5 +12,4 @@ from .montecarlo_tree_search_player import MontecarloTreeSearchPlayer
 from .bridge_burning_montecarlo_tree_search_player import BridgeBurningMontecarloTreeSearchPlayer
 from .nonexploring_montecarlo_tree_search_player import NonExploringMontecarloTreeSearchPlayer
 from .online_evolution_player import OnlineEvolutionPlayer
-from .ntuple_bandit_online_evolution_player import NTupleBanditOnlineEvolutionPlayer
 from .genetic_player import GeneticPlayer

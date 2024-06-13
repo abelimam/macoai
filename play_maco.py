@@ -37,7 +37,6 @@ if __name__ == '__main__':
     # MACO parameters
     parameters = MacoGameParameters()
     forward_model = MacoForwardModel()
-    fitness_evaluator = MacoFitnessEvaluator(ntboe_heuristic)
     game = MacoGame(parameters, forward_model)
 
     # players
@@ -53,10 +52,7 @@ if __name__ == '__main__':
     genetic = GeneticPlayer(genetic_heuristic, 100, 0.2, 0.1, 200)
 
 
-    # Maco players (Adjust the NTBOE player to work with Maco, if applicable)
-    ntboe_maco = NTupleBanditOnlineEvolutionPlayer(ntboe_heuristic, fitness_evaluator, dimensions, 8, 5, 0.55, 1000)
-
-    players = [bbmcts, greedy]  # List of players
+    players = [human_player, greedy]  # List of players
 
     game.set_save_file(save_name)
 
