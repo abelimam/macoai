@@ -31,7 +31,7 @@ if __name__ == '__main__':
     budget = 5                                  # Time to think for the players (in seconds)
     rounds = 100                                # Number of rounds to play
     verbose = True                              # Whether to print messages
-    enforce_time = False                         # Whether the player time to think is going to be enforced
+    enforce_time = True                         # Whether the player time to think is going to be enforced
     save_name = "out/maco_output.txt"           # Where the game is going to be saved, can be None
 
     # MACO parameters
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     genetic = GeneticPlayer(genetic_heuristic, 100, 0.2, 0.1, 200)
 
 
-    players = [human_player, greedy]  # List of players
+    players = [genetic, greedy]  # List of players
 
     game.set_save_file(save_name)
 

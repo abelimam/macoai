@@ -24,9 +24,9 @@ class GeneticPlayer(Player):
         current_observation = observation.clone()
 
         chromosome_length = observation.get_game_parameters().get_action_points_per_turn()
-        self.ga = GeneticAlgorithm(self.population_size, chromosome_length, self.mutation_rate, self.elite_rate)
+        self.ga = GeneticAlgorithm(self.population_size, chromosome_length, self.mutation_rate, self.elite_rate, self.heuristic)
 
-        population = self.ga.initialize_population(current_observation)
+        population = self.ga.initialize_population(current_observation, forward_model)
 
         start_time = time.time()
         generation = 0
@@ -34,7 +34,7 @@ class GeneticPlayer(Player):
 
         while time.time() - start_time < budget:
             population = self.ga.evolve(population, self.fitness_function(current_observation, forward_model),
-                                        current_observation)
+                                        current_observation, generation)
             best_chromosome = max(population, key=lambda chromosome: chromosome.fitness)
 
             if best_chromosome.fitness > best_fitness:

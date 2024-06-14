@@ -1,10 +1,8 @@
 import time
 from typing import List, Tuple
 
-from games.asmacag import AsmacagFitnessEvaluator
 from heuristics import SimpleHeuristic
-from players import OnlineEvolutionPlayer, NTupleBanditOnlineEvolutionPlayer
-from players.ntuple_bandit_online_evolution import FitnessEvaluator
+from players import OnlineEvolutionPlayer
 from utils.bandit_1d import Bandit1D
 from utils.bandit_2d import Bandit2D
 from utils.game_evaluator import GameEvaluator

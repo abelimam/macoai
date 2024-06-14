@@ -11,8 +11,8 @@
     "player2_config": {
         "mutation_rate": 0.2,
         "elite_rate": 0.1,
-        "population_size": 100,
-        "generations": 200
+        "population_size": 75,
+        "generations": 500
     },
-    "result_file": "out/maco/grac_gen_simple_100_5_02_01_100_200.json"
+    "result_file": "out/maco/grac_gen_simple_100_5_02_01_75_500.json"
 }

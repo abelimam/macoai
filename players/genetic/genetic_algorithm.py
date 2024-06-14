@@ -1,6 +1,6 @@
 import random
 from typing import List, Tuple
-from games import Observation
+from games import Observation, ForwardModel
 
 class Chromosome:
     def __init__(self, genes: List[int]):
@@ -17,15 +17,41 @@ class Chromosome:
         self.genes[index] = value
 
 class GeneticAlgorithm:
-    def __init__(self, population_size: int, chromosome_length: int, mutation_rate: float, elite_rate: float):
+    def __init__(self, population_size: int, chromosome_length: int, mutation_rate: float, elite_rate: float, heuristic):
         self.population_size = population_size
         self.chromosome_length = chromosome_length
         self.mutation_rate = mutation_rate
         self.elite_rate = elite_rate
+        self.heuristic = heuristic
 
-    def initialize_population(self, observation: 'Observation') -> List[Chromosome]:
-        return [Chromosome([random.randint(0, len(observation.get_actions()) - 1) for _ in range(self.chromosome_length)])
-                for _ in range(self.population_size)]
+
+    def initialize_population(self, observation: 'Observation', forward_model: 'ForwardModel') -> List[Chromosome]:
+        population = []
+        for _ in range(self.population_size):
+            genes = []
+            for _ in range(self.chromosome_length):
+                if random.random() < 0.0:  # 80% chance of selecting a heuristic-based action
+                    action = self.select_heuristic_action(observation, forward_model)
+                else:  # 20% chance of selecting a random action
+                    action = random.randint(0, len(observation.get_actions()) - 1)
+                genes.append(action)
+            population.append(Chromosome(genes))
+        return population
+
+    def select_heuristic_action(self, observation: 'Observation', forward_model: 'ForwardModel') -> int:
+        best_action_index = None
+        best_score = float('-inf')
+
+        for i, action in enumerate(observation.get_actions()):
+            next_observation = observation.clone()
+            forward_model.step(next_observation, action)
+            score = self.heuristic.get_reward(next_observation)
+
+            if score > best_score:
+                best_score = score
+                best_action_index = i
+
+        return best_action_index
 
     def evaluate_fitness(self, population: List[Chromosome], fitness_function) -> None:
         for chromosome in population:
@@ -39,12 +65,12 @@ class GeneticAlgorithm:
         parent2 = max(tournament_candidates, key=lambda chromosome: chromosome.fitness)
         return parent1, parent2
 
-    def crossover(self, parent1: Chromosome, parent2: Chromosome) -> Tuple[Chromosome, Chromosome]:
-        if random.random() < 0.5:
+    def crossover(self, parent1: Chromosome, parent2: Chromosome, generation: int) -> Tuple[Chromosome, Chromosome]:
+        if random.random() < 0.5:  # one-point crossover
             crossover_point = random.randint(1, len(parent1) - 1)
             child1_genes = parent1[:crossover_point] + parent2[crossover_point:]
             child2_genes = parent2[:crossover_point] + parent1[crossover_point:]
-        else:
+        else:  # uniform crossover
             child1_genes = []
             child2_genes = []
             for i in range(len(parent1)):
@@ -69,15 +95,15 @@ class GeneticAlgorithm:
                     else:
                         chromosome[i] = random.randint(0, len(actions) - 1)
 
-    def evolve(self, population: List[Chromosome], fitness_function, observation: 'Observation') -> List[Chromosome]:
+    def evolve(self, population: List[Chromosome], fitness_function, observation: 'Observation', generation: int) -> List[Chromosome]:
         self.evaluate_fitness(population, fitness_function)
-        population.sort(key=lambda chromosome: chromosome.fitness, reverse=True)
+        population = sorted(population, key=lambda chromosome: chromosome.fitness, reverse=True)
         elite_count = int(self.elite_rate * self.population_size)
         new_population = population[:elite_count]
 
         while len(new_population) < self.population_size:
             parent1, parent2 = self.select_parents(population)
-            child1, child2 = self.crossover(parent1, parent2)
+            child1, child2 = self.crossover(parent1, parent2, generation)
             self.mutate(child1, observation)
             self.mutate(child2, observation)
             new_population.extend([child1, child2])

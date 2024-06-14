@@ -20,7 +20,6 @@ class MacoForwardModel(ForwardModel):
             observation = game_state
 
         if action is None or not observation.is_action_valid(action):
-            print("Invalid action!")
             self.give_invalid_action_penalty(game_state)
             return False
 
