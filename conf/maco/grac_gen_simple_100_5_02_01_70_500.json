@@ -1,6 +1,6 @@
 {
     "game_name": "Maco",
-    "n_games": 100,
+    "n_games": 10,
     "budget": 5,
     "rounds": 100,
     "verbose": false,
@@ -11,8 +11,8 @@
     "player2_config": {
         "mutation_rate": 0.2,
         "elite_rate": 0.1,
-        "population_size": 50,
+        "population_size": 70,
         "generations": 500
     },
-    "result_file": "out/maco/grac_gen_simple_100_5_02_01_50_500.json"
+    "result_file": "out/maco/grac_gen_simple_100_5_02_01_70_500.json"
 }

@@ -15,7 +15,7 @@ if __name__ == '__main__':
     mcts_heuristic = SimpleHeuristic()
     ## Online Evolution
     oe_heuristic = SimpleHeuristic()
-
+    ## Genetic
     genetic_heuristic = SimpleHeuristic()
 
     ## NTuple Bandit Online Evolution
@@ -49,10 +49,10 @@ if __name__ == '__main__':
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 2.8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
     oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
-    genetic = GeneticPlayer(genetic_heuristic, 100, 0.2, 0.1, 200)
+    genetic = GeneticPlayer(genetic_heuristic, 10, 0.2, 0.2, 100)
 
 
-    players = [genetic, greedy]  # List of players
+    players = [greedy, genetic]  # List of players
 
     game.set_save_file(save_name)
 
