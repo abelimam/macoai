@@ -1,6 +1,7 @@
 from typing import List
 from games import Action, Observation, ForwardModel
 from players.player import Player
+import time
 
 # Ali
 class GreedyActionPlayer(Player):
@@ -12,8 +13,9 @@ class GreedyActionPlayer(Player):
     def think(self, observation: 'Observation', forward_model: 'ForwardModel', budget: float) -> None:
         self.actions = []
         current_observation = observation.clone()
+        t0 = time.time()
 
-        for _ in range(observation.get_game_parameters().get_action_points_per_turn()):
+        while time.time() - t0 < budget - 0.05 and len(self.actions) < observation.get_game_parameters().get_action_points_per_turn():
             best_action = None
             best_score = float('-inf')
 
@@ -21,7 +23,8 @@ class GreedyActionPlayer(Player):
                 next_observation = current_observation.clone()
                 forward_model.step(next_observation, action)
                 score = self.heuristic.get_reward(next_observation)
-
+                self.forward_model_visits += 1
+                self.visited_states[next_observation] += 1
                 if score > best_score:
                     best_score = score
                     best_action = action

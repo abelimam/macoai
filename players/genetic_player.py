@@ -23,7 +23,7 @@ class GeneticPlayer(Player):
         self.turn.clear()
 
         # Initialize population
-        self.population = [self.generate_random_individual(observation) for _ in range(self.population_size)]
+        self.population = [self.generate_random_individual(observation, forward_model) for _ in range(self.population_size)]
 
         for generation in range(self.generations):
             # Evaluate fitness of each individual
@@ -33,7 +33,7 @@ class GeneticPlayer(Player):
             parents = self.select_parents(self.population, fitness_scores)
 
             # Create offspring through crossover and mutation
-            offspring = self.reproduce(parents, observation)
+            offspring = self.reproduce(parents, observation, forward_model)
 
             # Replace population with offspring, keeping the elite individuals
             elite_count = int(self.elite_rate * self.population_size)
@@ -50,13 +50,18 @@ class GeneticPlayer(Player):
             return self.turn[index]
         return None
 
-    def generate_random_individual(self, observation: 'Observation') -> List['Action']:
+    def generate_random_individual(self, observation: 'Observation', forward_model: 'ForwardModel') -> List['Action']:
         """Generates a random individual (a list of actions) based on the available actions."""
-        actions = observation.get_actions()
         individual = []
+        current_observation = observation.clone()
         for _ in range(observation.get_game_parameters().get_action_points_per_turn()):
-            action = random.choice(actions)
-            individual.append(action)
+            actions = current_observation.get_actions()
+            if actions:
+                action = random.choice(actions)
+                individual.append(action)
+                forward_model.step(current_observation, action)
+            else:
+                break
         return individual
 
     def evaluate_individual(self, individual: List['Action'], observation: 'Observation', forward_model: 'ForwardModel') -> float:
@@ -91,19 +96,19 @@ class GeneticPlayer(Player):
             parents.append(population[winner_index])
         return parents
 
-    def reproduce(self, parents: List[List['Action']], observation: 'Observation') -> List[List['Action']]:
+    def reproduce(self, parents: List[List['Action']], observation: 'Observation', forward_model: 'ForwardModel') -> List[List['Action']]:
         """Creates offspring through crossover and mutation."""
         offspring = []
         for i in range(0, len(parents) - 1, 2):
             parent1, parent2 = parents[i], parents[i + 1]
             child1, child2 = self.crossover(parent1, parent2)
-            child1 = self.mutate(child1, observation)
-            child2 = self.mutate(child2, observation)
+            child1 = self.mutate(child1, observation, forward_model)
+            child2 = self.mutate(child2, observation, forward_model)
             offspring.extend([child1, child2])
 
         if len(parents) % 2 != 0:
             last_parent = parents[-1]
-            last_child = self.mutate(last_parent, observation)
+            last_child = self.mutate(last_parent, observation, forward_model)
             offspring.append(last_child)
 
         return offspring
@@ -115,12 +120,24 @@ class GeneticPlayer(Player):
         child2 = parent2[:crossover_point] + parent1[crossover_point:]
         return child1, child2
 
-    def mutate(self, individual: List['Action'], observation: 'Observation') -> List['Action']:
+    def mutate(self, individual: List['Action'], observation: 'Observation', forward_model: 'ForwardModel') -> List[
+        'Action']:
         """Performs mutation on an individual."""
-        mutated_individual = individual.copy()
-        for i in range(len(mutated_individual)):
+        mutated_individual = []
+        current_observation = observation.clone()
+        for action in individual:
             if random.random() < self.mutation_rate:
-                mutated_individual[i] = random.choice(observation.get_actions())
+                actions = current_observation.get_actions()
+                if actions:
+                    mutated_action = random.choice(actions)
+                    mutated_individual.append(mutated_action)
+                    forward_model.step(current_observation, mutated_action)
+                else:
+                    mutated_individual.append(action)
+                    forward_model.step(current_observation, action)
+            else:
+                mutated_individual.append(action)
+                forward_model.step(current_observation, action)
         return mutated_individual
 
     # endregion

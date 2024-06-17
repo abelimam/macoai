@@ -109,6 +109,12 @@ class MacoObservation(Observation):
     def get_player_1_score(self) -> int:
         return self.player_1_score
 
+    def get_player_0_pieces(self) -> int:
+        return self.player_0_pieces
+
+    def get_player_1_pieces(self) -> int:
+        return self.player_1_pieces
+
     def __str__(self):
         board_str = ""
         for i in range(self.game_parameters.board_size):

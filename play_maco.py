@@ -31,7 +31,7 @@ if __name__ == '__main__':
     budget = 5                                  # Time to think for the players (in seconds)
     rounds = 100                                # Number of rounds to play
     verbose = True                              # Whether to print messages
-    enforce_time = True                         # Whether the player time to think is going to be enforced
+    enforce_time = False                         # Whether the player time to think is going to be enforced
     save_name = "out/maco_output.txt"           # Where the game is going to be saved, can be None
 
     # MACO parameters
@@ -45,14 +45,14 @@ if __name__ == '__main__':
     always_first = AlwaysFirstPlayer()
     greedy = GreedyActionPlayer(greedy_heuristic)
     greedyt = GreedyTurnPlayer(greedyt_heuristic)
-    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 8)
+    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 3)
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 2.8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
-    oe = OnlineEvolutionPlayer(oe_heuristic, 125, 0.15, 0.15)
+    oe = OnlineEvolutionPlayer(oe_heuristic, 80, 0.2, 0.2)
     genetic = GeneticPlayer(genetic_heuristic, 10, 0.2, 0.2, 100)
 
 
-    players = [greedy, genetic]  # List of players
+    players = [genetic, bbmcts]  # List of players
 
     game.set_save_file(save_name)
 
