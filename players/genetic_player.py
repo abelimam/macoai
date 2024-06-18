@@ -17,7 +17,8 @@ class GeneticPlayer(Player):
         self.generations = generations
         self.population = []
         self.turn = []
-        self.genetic_algorithm = GeneticAlgorithm(self.heuristic, self.population_size, self.mutation_rate, self.elite_rate)
+        self.genetic_algorithm = GeneticAlgorithm(self.heuristic, self.population_size, self.mutation_rate, self.elite_rate, self.forward_model_visits, self.visited_states)
+
 
 
     # region Methods
@@ -46,6 +47,10 @@ class GeneticPlayer(Player):
         # Select the best individual as the action sequence for the turn
         best_individual = max(self.population, key=lambda individual: self.genetic_algorithm.evaluate_individual(individual, observation, forward_model))
         self.turn = best_individual
+
+        # Update forward_model_visits and visited_states from the GeneticAlgorithm instance
+        self.forward_model_visits = self.genetic_algorithm.forward_model_visits
+        # self.visited_states = self.genetic_algorithm.visited_states
 
     def get_action(self, index: int) -> 'Action':
         """Returns the next action in the turn."""

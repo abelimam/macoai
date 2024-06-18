@@ -3,15 +3,18 @@ import numpy as np
 from typing import List, Tuple
 from games import Action, Observation, ForwardModel
 from heuristics import Heuristic
+from collections import defaultdict
+
 
 
 class GeneticAlgorithm:
-    def __init__(self, heuristic: 'Heuristic', population_size: int, mutation_rate: float, elite_rate: float):
+    def __init__(self, heuristic: 'Heuristic', population_size: int, mutation_rate: float, elite_rate: float, forward_model_visits: int, visited_states: defaultdict):
         self.heuristic = heuristic
         self.population_size = population_size
         self.mutation_rate = mutation_rate
         self.elite_rate = elite_rate
         self.forward_model_visits = 0
+        # self.visited_states = defaultdict(int)
 
     def generate_random_individual(self, observation: 'Observation', forward_model: 'ForwardModel') -> List['Action']:
         """Generates a random individual (a list of actions) based on the available actions."""
@@ -23,6 +26,8 @@ class GeneticAlgorithm:
                 action = random.choice(actions)
                 individual.append(action)
                 forward_model.step(current_observation, action)
+                self.forward_model_visits += 1
+                # self.visited_states[current_observation] += 1
             else:
                 break
         return individual
@@ -39,11 +44,15 @@ class GeneticAlgorithm:
                 if forward_model.is_terminal(new_observation) or forward_model.is_turn_finished(new_observation):
                     break
                 forward_model.step(new_observation, action)
+                self.forward_model_visits += 1
+                # self.visited_states[new_observation] += 1
 
             # Simulate the opponent's turn
             while not forward_model.is_turn_finished(new_observation):
                 opponent_action = new_observation.get_random_action()
                 forward_model.step(new_observation, opponent_action)
+                self.forward_model_visits += 1
+                # self.visited_states[new_observation] += 1
 
             reward = self.heuristic.get_reward(new_observation)
             total_reward += reward
@@ -100,10 +109,13 @@ class GeneticAlgorithm:
                     mutated_action = random.choice(actions)
                     mutated_individual.append(mutated_action)
                     forward_model.step(current_observation, mutated_action)
+
                 else:
                     mutated_individual.append(action)
                     forward_model.step(current_observation, action)
             else:
                 mutated_individual.append(action)
                 forward_model.step(current_observation, action)
+            self.forward_model_visits += 1
+            # self.visited_states[current_observation] += 1
         return mutated_individual

@@ -1,15 +1,12 @@
 {
     "game_name": "Maco",
-    "n_games": 25,
-    "budget": 5,
+    "n_games": 2,
+    "budget": 10,
     "rounds": 100,
-    "verbose": false,
+    "verbose": true,
     "enforce_time": true,
     "heuristic_name": "Simple",
-    "player1_name": "BridgeBurningMontecarloTreeSearch",
-    "player1_config": {
-        "c_value": 2.8
-    },
+    "player1_name": "GreedyAction",
     "player2_name": "Genetic",
     "player2_config": {
         "mutation_rate": 0.2,
@@ -17,5 +14,5 @@
         "population_size": 10,
         "generations": 100
     },
-    "result_file": "out/maco/mctsbb_gen_simple_25_5_28_02_02_10_100.json"
+    "result_file": "out/maco/grac_gen_simple_2_5_02_02_10_100.json"
 }
