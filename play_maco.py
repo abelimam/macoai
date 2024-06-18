@@ -45,14 +45,14 @@ if __name__ == '__main__':
     always_first = AlwaysFirstPlayer()
     greedy = GreedyActionPlayer(greedy_heuristic)
     greedyt = GreedyTurnPlayer(greedyt_heuristic)
-    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 3)
+    mcts = MontecarloTreeSearchPlayer(mcts_heuristic, 1.5)
     bbmcts = BridgeBurningMontecarloTreeSearchPlayer(mcts_heuristic, 2.8)
     nemcts = NonExploringMontecarloTreeSearchPlayer(mcts_heuristic)
     oe = OnlineEvolutionPlayer(oe_heuristic, 80, 0.2, 0.2)
     genetic = GeneticPlayer(genetic_heuristic, 10, 0.2, 0.2, 100)
 
 
-    players = [genetic, bbmcts]  # List of players
+    players = [genetic, greedy]  # List of players
 
     game.set_save_file(save_name)
 

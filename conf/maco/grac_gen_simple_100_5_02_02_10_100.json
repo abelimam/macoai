@@ -1,6 +1,6 @@
 {
     "game_name": "Maco",
-    "n_games": 100,
+    "n_games": 10,
     "budget": 5,
     "rounds": 100,
     "verbose": false,
@@ -14,5 +14,5 @@
         "elite_rate": 0.2,
         "generations": 100
     },
-    "result_file": "out/maco/grac_gen_simple_100_5_02_02_10_100.json"
+    "result_file": "out/maco/grac_gen_simple_25_5_02_02_10_100.json"
 }
