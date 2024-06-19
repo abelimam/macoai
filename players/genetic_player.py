@@ -8,7 +8,7 @@ from players.genetic import GeneticAlgorithm
 
 
 class GeneticPlayer(Player):
-    def __init__(self, heuristic: 'Heuristic', population_size: int, mutation_rate: float, elite_rate: float, generations: int):
+    def __init__(self, heuristic: 'Heuristic', population_size: int, mutation_rate: float, elite_rate: float, generations: int = 100):
         super().__init__()
         self.heuristic = heuristic
         self.population_size = population_size

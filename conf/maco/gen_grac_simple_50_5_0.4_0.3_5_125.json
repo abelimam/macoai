@@ -1,0 +1,18 @@
+{
+    "game_name": "Maco",
+    "n_games": 50,
+    "budget": 5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "Genetic",
+    "player1_config": {
+        "mutation_rate": 0.4,
+        "elite_rate": 0.3,
+        "population_size": 5,
+        "generations": 125
+    },
+    "player2_name": "GreedyAction",
+    "result_file": "out/maco/gen_grac_simple_50_5_0.4_0.3_5_125.json"
+}

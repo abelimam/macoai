@@ -1,0 +1,17 @@
+{
+    "game_name": "Maco",
+    "n_games": 10,
+    "budget": 5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player1_config": {
+        "mutation_rate": 0.2,
+        "survival_rate": 0.4,
+        "population_size": 20
+    },
+    "player2_name": "GreedyAction",
+    "result_file": "out/maco/oe_grac_simple_100_5_0.2_0.4_20.json"
+}

@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "Genetic",
+    "player2_name": "GreedyAction",
+    "n_games": 10,
+    "budget": 5,
+    "wins1": 7,
+    "wins2": 2,
+    "ties": 1,
+    "player_1_forward_model_visits": 21568.5,
+    "player_1_visited_states": 0.0,
+    "player_2_forward_model_visits": 1199.8,
+    "player_2_visited_states": 874.5,
+    "p_value": 0.02461876138081509,
+    "processing_time": 306.03048157691956,
+    "date": "2024-06-18",
+    "hour": "11:26:59"
+}
