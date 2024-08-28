@@ -6,14 +6,14 @@
     "n_games": 10,
     "budget": 5,
     "wins1": 1,
-    "wins2": 6,
-    "ties": 3,
-    "player_1_forward_model_visits": 10154.9,
-    "player_1_visited_states": 5920.3,
-    "player_2_forward_model_visits": 1121.0,
-    "player_2_visited_states": 794.1,
-    "p_value": 0.019076322101778453,
-    "processing_time": 357.6344904899597,
+    "wins2": 5,
+    "ties": 4,
+    "player_1_forward_model_visits": 15584.2,
+    "player_1_visited_states": 7738.6,
+    "player_2_forward_model_visits": 1164.4,
+    "player_2_visited_states": 825.7,
+    "p_value": 0.05096193696776341,
+    "processing_time": 376.9820873737335,
     "date": "2024-06-18",
-    "hour": "11:45:56"
+    "hour": "19:08:03"
 }

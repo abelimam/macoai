@@ -5,15 +5,15 @@
     "player2_name": "GreedyAction",
     "n_games": 10,
     "budget": 5,
-    "wins1": 7,
-    "wins2": 1,
+    "wins1": 6,
+    "wins2": 2,
     "ties": 2,
-    "player_1_forward_model_visits": 19261.3,
+    "player_1_forward_model_visits": 18744.0,
     "player_1_visited_states": 0.0,
-    "player_2_forward_model_visits": 1160.2,
-    "player_2_visited_states": 850.3,
-    "p_value": 0.0061698993205441255,
-    "processing_time": 320.5481867790222,
+    "player_2_forward_model_visits": 1207.5,
+    "player_2_visited_states": 869.7,
+    "p_value": 0.067889154861829,
+    "processing_time": 228.75236439704895,
     "date": "2024-06-18",
-    "hour": "10:24:07"
+    "hour": "18:35:44"
 }
