@@ -1,0 +1,17 @@
+{
+    "game_name": "Maco",
+    "n_games": 100,
+    "budget": 5,
+    "rounds": 100,
+    "verbose": false,
+    "enforce_time": true,
+    "heuristic_name": "Simple",
+    "player1_name": "GreedyTurn",
+    "player2_name": "OnlineEvolution",
+    "player2_config": {
+        "mutation_rate": 0.1,
+        "survival_rate": 0.4,
+        "population_size": 30
+    },
+    "result_file": "out/maco/grtu_oe_simple_100_5_01_04_30.json"
+}

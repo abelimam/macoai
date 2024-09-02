@@ -1,77 +1,69 @@
 import json
 from conf.players_config import *
 
-def generate_parameter_combinations(base_config, parameters):
-    combinations = []
-    keys = list(parameters.keys())
-
-    def backtrack(start_index, curr_config):
-        if start_index == len(keys):
-            combinations.append(curr_config.copy())
-            return
-
-        key = keys[start_index]
-        for value in parameters[key]:
-            curr_config[key] = value
-            backtrack(start_index + 1, curr_config)
-
-    backtrack(0, base_config)
-    return combinations
-
 if __name__ == '__main__':
     budgets = [5]
-    players = ['Genetic', 'MontecarloTreeSearch', 'BridgeBurningMontecarloTreeSearch', 'OnlineEvolution']
-    players_code = ['gen', 'mcts', 'mctsbb', 'oe']
-    opponents = ['GreedyAction']
-    parameters = {
-        'Genetic': {
-            'population_size': [5, 10, 20, 30],
-            'mutation_rate': [0.1, 0.2, 0.3, 0.4],
-            'elite_rate': [0.1, 0.2, 0.3, 0.4],
-            'generations': [50, 75, 100, 125]
-        },
-        'MontecarloTreeSearch': {
-            'c_value': [1.4, 2.8, 3.5, 4.2]
-        },
-        'BridgeBurningMontecarloTreeSearch': {
-            'c_value': [1.4, 2.8, 3.5, 4.2]
-        },
-        'OnlineEvolution': {
-            'population_size': [5, 10, 20, 30],
-            'mutation_rate': [0.1, 0.2, 0.3, 0.4],
-            'survival_rate': [0.1, 0.2, 0.3, 0.4]
-        }
-    }
+    players = ['GreedyAction', 'GreedyTurn', 'MontecarloTreeSearch', 'BridgeBurningMontecarloTreeSearch', 'Genetic', \
+               'OnlineEvolution', 'Random']
+    players_code = ['grac', 'grtu', 'mcts', 'mctsbb', 'gen', 'oe', 'rand']
+    non_config = ['Random', 'GreedyAction', 'GreedyTurn', 'NonExploringMontecarloTreeSearch']
     games = ['Maco']
 
     for game in games:
-        for budget in budgets:
-            for player, player_code in zip(players, players_code):
-                for opponent in opponents:
-                    base_config = eval(f"get_{player.lower()}_conf(budget)")
-                    config_combinations = generate_parameter_combinations(base_config, parameters[player])
+        for buget in budgets:
+            for i in range(len(players)):
+                for j in range(i + 1, len(players)):
+                    if (players[i] in non_config and players[j] in non_config) or (
+                            players[i] == 'NTupleBanditOnlineEvolution' or players[j] == 'NTupleBanditOnlineEvolution'):
+                        continue
 
-                    for i, player_config in enumerate(config_combinations, start=1):
-                        conf = {
-                            "game_name": game,
-                            "n_games": 10,
-                            "budget": budget,
-                            "rounds": 100,
-                            "verbose": False,
-                            "enforce_time": True,
-                            "heuristic_name": "Simple",
-                            "player1_name": player,
-                            "player1_config": player_config,
-                            "player2_name": opponent
-                        }
+                    # Basic configuration
+                    conf = {
+                        "game_name": game,
+                        "n_games": 100,
+                        "budget": buget,
+                        "rounds": 100,
+                        "verbose": False,
+                        "enforce_time": True,
+                        "heuristic_name": "Simple",
+                    }
 
-                        player1_str_conf = "_".join(f"{value}" for key, value in player_config.items())
-                        out = f"out/{game.lower()}/"
-                        filename = f"conf/{game.lower()}/"
-                        simple_conf = f"{player_code}_grac_simple_100_{budget}"
-                        out += f"{simple_conf}_{player1_str_conf}.json"
-                        filename += f"{simple_conf}_{player1_str_conf}.json"
-                        conf["result_file"] = out
+                    # Player 1 configuration
+                    player = players[i]
+                    conf["player1_name"] = player.replace('_Random', '').replace('_Full', '')
+                    player1_str_conf = None
+                    if player not in non_config:
+                        p_conf = eval('get_' + player.lower() + '_conf')(buget)
+                        conf["player1_config"] = p_conf
+                        player1_str_conf = "_".join(
+                            str(int(val)) if isinstance(val, bool) else str(val).replace('.', '') for val in
+                            p_conf.values())
 
-                        with open(filename, 'w') as f:
-                            json.dump(conf, f, indent=4)
+                    # Player 2 configuration
+                    conf["player2_name"] = players[j].replace('_Random', '').replace('_Full', '')
+                    player2_str_conf = None
+                    if players[j] not in non_config:
+                        p_conf = eval('get_' + players[j].lower() + '_conf')(buget)
+                        conf["player2_config"] = p_conf
+                        player2_str_conf = "_".join(
+                            str(int(val)) if isinstance(val, bool) else str(val).replace('.', '') for val in
+                            p_conf.values())
+
+                    # Out file configuration
+                    out = f"out/{game.lower()}/"
+                    filename = f"conf/{game.lower()}/"
+                    simple_conf = f"{players_code[i]}_{players_code[j]}_simple_100_{buget if buget != 0.5 else '05'}"
+                    out += simple_conf
+                    filename += simple_conf
+                    if player1_str_conf:
+                        out += f"_{player1_str_conf}"
+                        filename += f"_{player1_str_conf}"
+                    if player2_str_conf:
+                        out += f"_{player2_str_conf}"
+                        filename += f"_{player2_str_conf}"
+                    out += ".json"
+                    filename += ".json"
+                    conf["result_file"] = out
+
+                    with open(filename, 'w') as f:
+                        json.dump(conf, f, indent=4)
