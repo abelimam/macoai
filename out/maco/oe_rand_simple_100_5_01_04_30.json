@@ -1,0 +1,19 @@
+{
+    "game_name": "Maco",
+    "heuristic_name": "Simple",
+    "player1_name": "OnlineEvolution",
+    "player2_name": "Random",
+    "n_games": 100,
+    "budget": 5,
+    "wins1": 100,
+    "wins2": 0,
+    "ties": 0,
+    "player_1_forward_model_visits": 8764.92,
+    "player_1_visited_states": 23.66,
+    "player_2_forward_model_visits": 0.0,
+    "player_2_visited_states": 0.0,
+    "p_value": 0.0,
+    "processing_time": 1330.7339148521423,
+    "date": "2024-09-04",
+    "hour": "02:08:34"
+}
