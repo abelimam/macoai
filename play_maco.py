@@ -52,7 +52,7 @@ if __name__ == '__main__':
     genetic = GeneticPlayer(genetic_heuristic, 10, 0.2, 0.2, 100)
 
 
-    players = [genetic, greedy]  # List of players
+    players = [human_player, greedy]  # List of players
 
     game.set_save_file(save_name)
 
