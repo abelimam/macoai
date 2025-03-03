@@ -5,15 +5,15 @@
     "player2_name": "Random",
     "n_games": 100,
     "budget": 5,
-    "wins1": 99,
+    "wins1": 100,
     "wins2": 0,
-    "ties": 1,
-    "player_1_forward_model_visits": 5357.92,
-    "player_1_visited_states": 3499.26,
+    "ties": 0,
+    "player_1_forward_model_visits": 7280.52,
+    "player_1_visited_states": 4335.72,
     "player_2_forward_model_visits": 0.0,
     "player_2_visited_states": 0.0,
     "p_value": 0.0,
-    "processing_time": 2741.964510679245,
-    "date": "2024-09-05",
-    "hour": "01:15:21"
+    "processing_time": 2650.7711896896362,
+    "date": "2025-01-15",
+    "hour": "00:54:56"
 }

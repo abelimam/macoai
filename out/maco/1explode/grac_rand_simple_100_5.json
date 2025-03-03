@@ -8,12 +8,12 @@
     "wins1": 100,
     "wins2": 0,
     "ties": 0,
-    "player_1_forward_model_visits": 0.0,
-    "player_1_visited_states": 0.0,
+    "player_1_forward_model_visits": 726.07,
+    "player_1_visited_states": 337.14,
     "player_2_forward_model_visits": 0.0,
     "player_2_visited_states": 0.0,
     "p_value": 0.0,
-    "processing_time": 41.73494267463684,
-    "date": "2024-06-11",
-    "hour": "03:44:45"
+    "processing_time": 94.7894332408905,
+    "date": "2025-02-06",
+    "hour": "00:21:41"
 }
